@@ -50,6 +50,15 @@ class _BasicInformationsPageState extends State<BasicInformationsPage> {
     foregroundColor: Colors.white,
   );
 
+  void addInformationToBloc() {
+    if (selectedSpecies != null) bloc.species = selectedSpecies as String;
+    if (selectedSex != null) bloc.sex = selectedSex as String;
+    if (selectedAge != null) bloc.age = selectedAge as String;
+    bloc.name = _nameController.text;
+    bloc.breed = _breedController.text;
+    bloc.color = _colorController.text;
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -86,15 +95,7 @@ class _BasicInformationsPageState extends State<BasicInformationsPage> {
                             ),
                           ),
                           const SizedBox(height: 40),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child:
-                                const Text('Qual é a espécie do animal?').body2(
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
+                          labelText('Qual é a espécie do animal?', true),
                           const SizedBox(height: 17),
                           Center(
                             child: Dropdown(
@@ -110,14 +111,7 @@ class _BasicInformationsPageState extends State<BasicInformationsPage> {
                             ),
                           ),
                           const SizedBox(height: 20),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: const Text('Qual o sexo do animal?').body2(
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
+                          labelText('Qual o sexo do animal?', false),
                           const SizedBox(height: 17),
                           Center(
                             child: Dropdown(
@@ -133,15 +127,9 @@ class _BasicInformationsPageState extends State<BasicInformationsPage> {
                             ),
                           ),
                           const SizedBox(height: 20),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: const Text(
-                                    'O animal possui algum tipo de identificação (coleira com nome por exemplo)?')
-                                .body2(
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
+                          labelText(
+                            'O animal possui algum tipo de identificação (coleira com nome por exemplo)?',
+                            false,
                           ),
                           const SizedBox(height: 17),
                           FilledInput(
@@ -150,44 +138,22 @@ class _BasicInformationsPageState extends State<BasicInformationsPage> {
                             hint: 'Nome',
                           ),
                           const SizedBox(height: 20),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: const Text('Possui raça definida?').body2(
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
+                          labelText('Possui raça definida?', false),
                           const SizedBox(height: 17),
                           FilledInput(
                             controller: _breedController,
                             hint: 'Raça',
                           ),
                           const SizedBox(height: 20),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: const Text('Qual a cor do animal?').body2(
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
+                          labelText('Qual a cor do animal?', true),
                           const SizedBox(height: 17),
                           FilledInput(
                             controller: _colorController,
                             hint: 'Cor',
+                            validator: Validations.validateRequired,
                           ),
                           const SizedBox(height: 20),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child:
-                                const Text('Qual a idade aparente do animal?')
-                                    .body2(
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
+                          labelText('Qual a idade aparente do animal?', false),
                           const SizedBox(height: 17),
                           Center(
                             child: Dropdown(
@@ -202,18 +168,23 @@ class _BasicInformationsPageState extends State<BasicInformationsPage> {
                               items: ages,
                             ),
                           ),
-                          const SizedBox(height: 26),
+                          const SizedBox(height: 30),
                           MainButton(
-                            disabled: true,
+                            disabled: (selectedSpecies == null &&
+                                _colorController.text.isEmpty),
                             text: 'Próximo',
                             onPressed: () {
-                              // todo: add bloc
+                              if (selectedSpecies != null &&
+                                  _colorController.text.isNotEmpty) {
+                                addInformationToBloc();
+                                Modular.to.pushNamed('/post-animal/add-photo/');
+                              }
                             },
                             backgroundColor: AppColors.colorGreenSuccess_300,
                           ),
                           const SizedBox(
                             height: 26,
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -234,4 +205,37 @@ String transformOption(text) {
   }
 
   return 'lost';
+}
+
+Widget labelText(String text, bool isRequired) {
+  return Align(
+    alignment: Alignment.centerLeft,
+    child: RichText(
+      text: TextSpan(
+        children: <TextSpan>[
+          TextSpan(
+            text: text,
+            style: const TextStyle(
+              fontFamily: 'bodyfont',
+              fontSize: 18,
+              color: Colors.white,
+              fontWeight: FontWeight.w400,
+              height: 1.25,
+            ),
+          ),
+          if (isRequired) ...[
+            const TextSpan(
+              text: ' *',
+              style: TextStyle(
+                fontFamily: 'bodyfont',
+                fontSize: 20,
+                color: Colors.red,
+                height: 0.8,
+              ),
+            ),
+          ]
+        ],
+      ),
+    ),
+  );
 }

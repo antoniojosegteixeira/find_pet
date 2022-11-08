@@ -8,6 +8,8 @@ class PostAnimalBloc extends Bloc<PostAnimalEvent, PostAnimalState> {
   String name = '';
   String species = '';
   String breed = '';
+  String sex = '';
+  String age = '';
   String color = '';
   String contact = '';
   String city = '';
