@@ -70,11 +70,15 @@ extension TextExtension on Text {
     );
   }
 
-  Text headline3({TextStyle? style, double? size, Color? color}) {
+  Text headline3({
+    TextStyle? style,
+    double? size,
+    Color? color,
+  }) {
     final TextStyle defaultStyle = TextStyle(
-      color: color ?? AppColors.colorNeutral_900,
+      color: color ?? AppColors.colorDarkBlue_900,
       fontWeight: FontWeight.w900,
-      fontSize: size ?? 32,
+      fontSize: size ?? 36,
       fontFamily: 'headlinefont',
       height: 1.06,
     );
@@ -107,7 +111,40 @@ extension TextExtension on Text {
     final TextStyle defaultStyle = TextStyle(
       color: color ?? AppColors.colorNeutral_900,
       fontWeight: FontWeight.w900,
-      fontSize: size ?? 24,
+      fontSize: size ?? 22,
+      fontFamily: 'headlinefont',
+      height: 1.08,
+    );
+    return Text(
+      data ?? '',
+      key: key,
+      locale: locale,
+      maxLines: maxLines,
+      overflow: overflow,
+      semanticsLabel: semanticsLabel,
+      softWrap: softWrap,
+      strutStyle: strutStyle,
+      textAlign: textAlign,
+      textDirection: textDirection,
+      textScaleFactor: textScaleFactor,
+      textWidthBasis: textWidthBasis,
+      style: style != null
+          ? TextStyle(
+              color: style.color ?? defaultStyle.color,
+              fontWeight: style.fontWeight ?? defaultStyle.fontWeight,
+              fontSize: style.fontSize ?? defaultStyle.fontSize,
+              fontFamily: style.fontFamily ?? defaultStyle.fontFamily,
+              height: style.height ?? defaultStyle.height,
+            )
+          : defaultStyle,
+    );
+  }
+
+  Text headline5({TextStyle? style, double? size, Color? color}) {
+    final TextStyle defaultStyle = TextStyle(
+      color: color ?? AppColors.colorNeutral_900,
+      fontWeight: FontWeight.w600,
+      fontSize: size ?? 18,
       fontFamily: 'headlinefont',
       height: 1.08,
     );
@@ -304,7 +341,7 @@ extension TextExtension on Text {
   Text body2({TextStyle? style, double? size, Color? color}) {
     final TextStyle defaultStyle = TextStyle(
       fontFamily: 'bodyfont',
-      fontSize: size ?? 16,
+      fontSize: size ?? 18,
       color: color ?? AppColors.colorNeutral_900,
       fontWeight: FontWeight.w400,
       height: 1.25,
@@ -337,10 +374,10 @@ extension TextExtension on Text {
   Text body3({TextStyle? style, double? size, Color? color}) {
     final TextStyle defaultStyle = TextStyle(
       fontFamily: 'bodyfont',
-      fontSize: size ?? 14,
+      fontSize: size ?? 16,
       color: color ?? AppColors.colorNeutral_900,
       fontWeight: FontWeight.w400,
-      height: 1.14,
+      height: 1.27,
     );
     return Text(
       data ?? '',

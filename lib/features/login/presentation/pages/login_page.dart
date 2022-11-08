@@ -1,5 +1,6 @@
 import 'package:find_pet/core/utils/validations.dart';
-import 'package:find_pet/features/login/presentation/cubit/login_cubit.dart';
+import 'package:find_pet/core/widgets/main_button.dart';
+import 'package:find_pet/features/login/presentation/bloc/login_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -16,12 +17,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  Future<void> _saveForm(BuildContext context) async {
-    if (_formKey.currentState != null && _formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-    }
-  }
-
   @override
   void dispose() {
     super.dispose();
@@ -29,15 +24,20 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
-    cubit = Modular.get<LoginCubit>();
+    bloc = Modular.get<LoginBloc>();
     super.initState();
   }
 
-  final AppBar _appBar = AppBar();
+  final AppBar _appBar = AppBar(
+    elevation: 0,
+    backgroundColor: Colors.white,
+    foregroundColor: AppColors.colorDarkBlue_900,
+  );
   bool _showPassword = false;
-  late LoginCubit cubit;
+  late final LoginBloc bloc;
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -45,86 +45,115 @@ class _LoginPageState extends State<LoginPage> {
         MediaQuery.of(context).padding.top;
 
     return BlocProvider(
-      create: (context) => cubit,
+      create: (context) => bloc,
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: _appBar,
-        backgroundColor: AppColors.colorNeutral_50,
+        backgroundColor: Colors.white,
         body: LayoutBuilder(
           builder: (context, constraints) => Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Spacer(
-                  flex: 2,
-                ),
-                const Text('Login').headline3(),
-                const Spacer(),
-                const Text(
-                  'Now use your email and password to access your account. ',
-                ).body2(color: AppColors.colorNeutral_600),
-                const Spacer(),
-                TextFormField(
-                  controller: _emailController,
-                  keyboardType: TextInputType.visiblePassword,
-                  decoration: const InputDecoration(
-                    hintText: 'E-mail',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.elliptical(
-                          8,
-                          8,
+            child: BlocBuilder<LoginBloc, LoginState>(
+              builder: (context, state) {
+                if (state is LoginLoading) {
+                  return Flex(
+                    direction: Axis.vertical,
+                    children: const [
+                      Expanded(
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      )
+                    ],
+                  );
+                }
+
+                if (state is LoginDone) {
+                  Modular.to.navigate('/search-animals/');
+                }
+                return Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const Spacer(
+                        flex: 2,
+                      ),
+                      const Text('Login').headline3(),
+                      const Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: const Text(
+                          'Bem vindo novamente a FindPet! Adicione seu email e senha para continuar o login.',
+                        ).body2(color: AppColors.colorNeutral_600),
+                      ),
+                      const Spacer(),
+                      TextFormField(
+                        controller: _emailController,
+                        keyboardType: TextInputType.visiblePassword,
+                        validator: Validations.validateMail,
+                        decoration: InputDecoration(
+                          hintText: 'Email',
+                          border: const UnderlineInputBorder(),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: AppColors.colorDarkBlue_800,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: screenHeight / 70,
-                ),
-                TextFormField(
-                  controller: _passController,
-                  keyboardType: TextInputType.visiblePassword,
-                  obscureText: _showPassword == false ? true : false,
-                  decoration: InputDecoration(
-                    hintText: 'Password',
-                    suffixIcon: GestureDetector(
-                      child: Icon(
-                        _showPassword == false
-                            ? Icons.visibility_off
-                            : Icons.visibility,
+                      SizedBox(
+                        height: screenHeight / 70,
                       ),
-                      onTap: () {
-                        setState(() {
-                          _showPassword = !_showPassword;
-                        });
-                      },
-                    ),
-                    border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.elliptical(
-                          8,
-                          8,
+                      TextFormField(
+                        controller: _passController,
+                        keyboardType: TextInputType.visiblePassword,
+                        obscureText: _showPassword == false ? true : false,
+                        decoration: InputDecoration(
+                          hintText: 'Senha',
+                          suffixIcon: GestureDetector(
+                            child: Icon(
+                              _showPassword == false
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color: AppColors.colorDarkBlue_800,
+                            ),
+                            onTap: () {
+                              setState(() {
+                                _showPassword = !_showPassword;
+                              });
+                            },
+                          ),
+                          border: const UnderlineInputBorder(),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: AppColors.colorDarkBlue_800,
+                            ),
+                          ),
                         ),
+                        validator: Validations.validatePasscode,
                       ),
-                    ),
+                      const Spacer(
+                        flex: 20,
+                      ),
+                      MainButton(
+                        text: 'LOGIN',
+                        onPressed: () {
+                          if (!_formKey.currentState!.validate()) {
+                            return;
+                          }
+                          bloc.add(
+                            DoLogin(
+                              email: _emailController.text,
+                              password: _passController.text,
+                            ),
+                          );
+                        },
+                      )
+                    ],
                   ),
-                  validator: Validations.validatePasscode,
-                ),
-                const Spacer(
-                  flex: 20,
-                ),
-                ElevatedButton(
-                  child: const Text("Login"),
-                  onPressed: () {
-                    cubit.doLogin(
-                      email: _emailController.text,
-                      password: _passController.text,
-                    );
-                  },
-                ),
-              ],
+                );
+              },
             ),
           ),
         ),

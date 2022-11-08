@@ -1,23 +1,27 @@
 import 'package:find_pet/features/login/domain/entities/user_entity.dart';
 
-class LoginUserModel extends LoginUserEntity {
-  const LoginUserModel({
+class UserModel extends UserEntity {
+  const UserModel({
     required super.id,
     required super.email,
-    required super.verifiedEmail,
-    required super.firstName,
-    required super.lastName,
+    required super.username,
+    required super.city,
+    required super.state,
+    required super.country,
     required super.sessionToken,
+    required super.refreshToken,
   });
 
-  factory LoginUserModel.fromJson(Map<String, dynamic> json) {
-    return LoginUserModel(
-      id: json['id'] as int,
-      email: json['email'] as int,
-      verifiedEmail: json['verified_email'] as bool,
-      firstName: json['first_name'] as String,
-      lastName: json['last_name'] as String,
-      sessionToken: json['token'] as String,
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      id: json['user']['id'].toString(),
+      email: json['user']['email'] as String,
+      username: json['user']['username'] as String,
+      city: json['user']['city'] as String,
+      state: json['user']['state'] as String,
+      country: json['user']['country'] as String,
+      sessionToken: json['token']['access'] as String,
+      refreshToken: json['token']['refresh'] as String,
     );
   }
 }

@@ -1,4 +1,4 @@
-part of 'login_cubit.dart';
+part of 'login_bloc.dart';
 
 abstract class LoginState extends Equatable {
   const LoginState();
@@ -11,12 +11,6 @@ class LoginInitial extends LoginState {}
 
 class LoginLoading extends LoginState {}
 
-class LoginDone extends LoginState {
-  const LoginDone({required this.loggedUser});
-
-  final LoginUserEntity loggedUser;
-  @override
-  List<Object> get props => [loggedUser];
-}
+class LoginDone extends LoginState {}
 
 class LoginError extends LoginState {}

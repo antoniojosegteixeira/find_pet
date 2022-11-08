@@ -12,7 +12,7 @@ class LoginRepositoryImpl implements LoginRepository {
   final LoginDatasource remoteDatasource;
 
   @override
-  Future<Either<Failure, LoginUserEntity>> loginWithEmailAndPassword({
+  Future<Either<Failure, UserEntity>> loginWithEmailAndPassword({
     String? email,
     String? password,
   }) async {

@@ -1,22 +1,46 @@
 import 'package:equatable/equatable.dart';
+import 'package:hive/hive.dart';
+part 'user_entity.g.dart';
 
-class LoginUserEntity extends Equatable {
-  const LoginUserEntity({
+@HiveType(typeId: 1)
+class UserEntity extends Equatable {
+  const UserEntity({
     required this.id,
     required this.email,
-    required this.verifiedEmail,
-    required this.firstName,
-    required this.lastName,
+    required this.username,
+    required this.city,
+    required this.state,
+    required this.country,
     required this.sessionToken,
+    required this.refreshToken,
   });
 
-  final int id;
-  final int email;
-  final bool verifiedEmail;
-  final String firstName;
-  final String lastName;
+  @HiveField(0)
+  final String id;
+  @HiveField(1)
+  final String email;
+  @HiveField(2)
+  final String username;
+  @HiveField(3)
+  final String city;
+  @HiveField(4)
+  final String state;
+  @HiveField(5)
+  final String country;
+  @HiveField(6)
   final String sessionToken;
+  @HiveField(7)
+  final String refreshToken;
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [
+        id,
+        email,
+        username,
+        city,
+        state,
+        country,
+        sessionToken,
+        refreshToken,
+      ];
 }

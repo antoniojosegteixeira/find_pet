@@ -1,5 +1,7 @@
+import 'package:find_pet/core/routes/routes.dart';
 import 'package:find_pet/core/utils/validations.dart';
-import 'package:find_pet/features/register/presentation/cubit/register_cubit.dart';
+import 'package:find_pet/core/widgets/main_button.dart';
+import 'package:find_pet/features/register/presentation/bloc/register_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -29,17 +31,19 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void initState() {
-    cubit = Modular.get<RegisterCubit>();
+    bloc = Modular.get<RegisterBloc>();
     super.initState();
   }
 
   final AppBar _appBar = AppBar();
   bool _showPassword = false;
-  late RegisterCubit cubit;
+  late RegisterBloc bloc;
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
-  final _firstNameController = TextEditingController();
-  final _lastNameController = TextEditingController();
+  final _cityController = TextEditingController();
+  final _stateController = TextEditingController();
+  final _countryController = TextEditingController();
+  final _usernameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -48,121 +52,175 @@ class _RegisterPageState extends State<RegisterPage> {
         MediaQuery.of(context).padding.top;
 
     return BlocProvider(
-      create: (context) => cubit,
+      create: (context) => bloc,
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: _appBar,
-        backgroundColor: AppColors.colorNeutral_50,
+        backgroundColor: Colors.white,
         body: LayoutBuilder(
           builder: (context, constraints) => Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Spacer(
-                  flex: 2,
-                ),
-                const Text('Register').headline3(),
-                const Spacer(),
-                const Text(
-                  'Now use your email and password to access your account. ',
-                ).body2(color: AppColors.colorNeutral_600),
-                const Spacer(),
-                TextFormField(
-                  controller: _emailController,
-                  keyboardType: TextInputType.visiblePassword,
-                  decoration: const InputDecoration(
-                    hintText: 'E-mail',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.elliptical(
-                          8,
-                          8,
+            child: BlocBuilder<RegisterBloc, RegisterState>(
+              builder: (context, state) {
+                if (state is RegisterLoading) {
+                  return const CircularProgressIndicator();
+                }
+                if (state is RegisterDone) {
+                  return const Text(
+                      'Sua conta foi criada! Por favor, faça login');
+                }
+                if (state is RegisterError) {
+                  return const Text('Erro');
+                }
+                return Form(
+                  key: _formKey,
+                  child: ListView(
+                    children: [
+                      const Text('Cadastro').headline3(),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: const Text(
+                          'Bem vindo a FindPet! Adicione seu email e senha para continuar o cadastro',
+                        ).body2(color: AppColors.colorNeutral_600),
+                      ),
+                      TextFormField(
+                        controller: _emailController,
+                        keyboardType: TextInputType.visiblePassword,
+                        decoration: InputDecoration(
+                          hintText: 'Email',
+                          border: const UnderlineInputBorder(),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: AppColors.colorDarkBlue_800,
+                            ),
+                          ),
                         ),
+                        validator: Validations.validateMail,
                       ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: screenHeight / 70,
-                ),
-                TextFormField(
-                  controller: _passController,
-                  keyboardType: TextInputType.visiblePassword,
-                  obscureText: _showPassword == false ? true : false,
-                  decoration: InputDecoration(
-                    hintText: 'Password',
-                    suffixIcon: GestureDetector(
-                      child: Icon(
-                        _showPassword == false
-                            ? Icons.visibility_off
-                            : Icons.visibility,
+                      SizedBox(
+                        height: screenHeight / 70,
                       ),
-                      onTap: () {
-                        setState(() {
-                          _showPassword = !_showPassword;
-                        });
-                      },
-                    ),
-                    border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.elliptical(
-                          8,
-                          8,
+                      TextFormField(
+                        controller: _passController,
+                        keyboardType: TextInputType.visiblePassword,
+                        obscureText: _showPassword == false ? true : false,
+                        decoration: InputDecoration(
+                          hintText: 'Senha',
+                          suffixIcon: GestureDetector(
+                            child: Icon(
+                              _showPassword == false
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color: AppColors.colorDarkBlue_800,
+                            ),
+                            onTap: () {
+                              setState(() {
+                                _showPassword = !_showPassword;
+                              });
+                            },
+                          ),
+                          border: const UnderlineInputBorder(),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: AppColors.colorDarkBlue_800,
+                            ),
+                          ),
                         ),
+                        validator: Validations.validatePasscode,
                       ),
-                    ),
-                  ),
-                  validator: Validations.validatePasscode,
-                ),
-                TextFormField(
-                  controller: _firstNameController,
-                  keyboardType: TextInputType.visiblePassword,
-                  decoration: const InputDecoration(
-                    hintText: 'First Name',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.elliptical(
-                          8,
-                          8,
+                      SizedBox(
+                        height: screenHeight / 70,
+                      ),
+                      TextFormField(
+                        controller: _usernameController,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          hintText: 'Nome Completo',
+                          border: const UnderlineInputBorder(),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: AppColors.colorDarkBlue_800,
+                            ),
+                          ),
                         ),
+                        validator: Validations.validateName,
                       ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: screenHeight / 70,
-                ),
-                TextFormField(
-                  controller: _lastNameController,
-                  keyboardType: TextInputType.visiblePassword,
-                  decoration: const InputDecoration(
-                    hintText: 'Last Name',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.elliptical(
-                          8,
-                          8,
+                      SizedBox(
+                        height: screenHeight / 70,
+                      ),
+                      TextFormField(
+                        controller: _cityController,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          hintText: 'Cidade',
+                          border: const UnderlineInputBorder(),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: AppColors.colorDarkBlue_800,
+                            ),
+                          ),
                         ),
+                        validator: Validations.validateRequired,
                       ),
-                    ),
+                      SizedBox(
+                        height: screenHeight / 70,
+                      ),
+                      TextFormField(
+                        controller: _stateController,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          hintText: 'Estado',
+                          border: const UnderlineInputBorder(),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: AppColors.colorDarkBlue_800,
+                            ),
+                          ),
+                        ),
+                        validator: Validations.validateRequired,
+                      ),
+                      SizedBox(
+                        height: screenHeight / 70,
+                      ),
+                      TextFormField(
+                        controller: _countryController,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          hintText: 'País',
+                          border: const UnderlineInputBorder(),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: AppColors.colorDarkBlue_800,
+                            ),
+                          ),
+                        ),
+                        validator: Validations.validateRequired,
+                      ),
+                      SizedBox(
+                        height: screenHeight / 70,
+                      ),
+                      MainButton(
+                        text: 'ENVIAR',
+                        onPressed: () {
+                          if (!_formKey.currentState!.validate()) {
+                            return;
+                          }
+                          bloc.add(
+                            RegisterUser(
+                              email: _emailController.text,
+                              password: _passController.text,
+                              username: _passController.text,
+                              city: _cityController.text,
+                              state: _stateController.text,
+                              country: _countryController.text,
+                            ),
+                          );
+                        },
+                      )
+                    ],
                   ),
-                ),
-                SizedBox(
-                  height: screenHeight / 70,
-                ),
-                ElevatedButton(
-                  child: const Text("Register"),
-                  onPressed: () {
-                    cubit.doRegister(
-                      email: _emailController.text,
-                      password: _passController.text,
-                      firstName: _firstNameController.text,
-                      lastName: _lastNameController.text,
-                    );
-                  },
-                ),
-              ],
+                );
+              },
             ),
           ),
         ),

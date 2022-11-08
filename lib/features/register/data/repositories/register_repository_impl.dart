@@ -15,18 +15,23 @@ class RegisterRepositoryImpl implements RegisterRepository {
   Future<Either<Failure, RegisterUserModel>> registerUser({
     String? email,
     String? password,
-    String? firstName,
-    String? lastName,
+    String? username,
+    String? city,
+    String? state,
+    String? country,
   }) async {
     try {
       final register = await remoteDatasource.registerUser(
         email: email!,
         password: password!,
-        firstName: firstName!,
-        lastName: lastName!,
+        username: username!,
+        city: city!,
+        state: state!,
+        country: country!,
       );
       return Right(register);
     } catch (err) {
+      print(err);
       return Left(ServerFailure());
     }
   }

@@ -5,13 +5,13 @@ import 'package:find_pet/core/usecase/usecase.dart';
 import 'package:find_pet/features/login/domain/entities/user_entity.dart';
 import 'package:find_pet/features/login/domain/repositories/login_repository.dart';
 
-class LoginUseCase implements UseCase<LoginUserEntity, Params> {
+class LoginUseCase implements UseCase<UserEntity, Params> {
   LoginUseCase({required this.repository});
 
   final LoginRepository repository;
 
   @override
-  Future<Either<Failure, LoginUserEntity>> call(
+  Future<Either<Failure, UserEntity>> call(
     Params params,
   ) async {
     return repository.loginWithEmailAndPassword(

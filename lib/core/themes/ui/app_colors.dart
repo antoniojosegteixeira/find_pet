@@ -16,10 +16,13 @@ class AppColors {
   static Color colorNeutral_0 = Color(0xFFFBFCFF);
 
 //Brand Blues
+
+  static Color colorDarkBlue_900 = Color(0xFF041D25);
+  static Color colorDarkBlue_800 = Color(0xFF124C5F);
   static Color colorBlueSecondary_800 = Color(0xFF034F83);
   static Color colorBluePrimary_700 = Color(0xFF2464AF);
   static Color colorBlue_500 = Color(0xFF3E90F1);
-  static Color colorBlue_50 = Color(0xFFE7F1FD);
+  static Color colorBlue_50 = Color(0xFFC7E7E1);
   static Color colorBlue_0 = Color(0xFF4285F4);
 
 //Brand Greens

@@ -1,4 +1,4 @@
-part of 'register_cubit.dart';
+part of 'register_bloc.dart';
 
 abstract class RegisterState extends Equatable {
   const RegisterState();
@@ -11,12 +11,10 @@ class RegisterInitial extends RegisterState {}
 
 class RegisterLoading extends RegisterState {}
 
-class RegisterDone extends RegisterState {
-  const RegisterDone({required this.registeredUser});
-
-  final RegisterUserEntity registeredUser;
-  @override
-  List<Object> get props => [registeredUser];
-}
-
 class RegisterError extends RegisterState {}
+
+class RegisterDone extends RegisterState {
+  const RegisterDone({required this.user});
+
+  final RegisterUserEntity user;
+}

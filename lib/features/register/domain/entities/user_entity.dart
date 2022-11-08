@@ -4,18 +4,18 @@ class RegisterUserEntity extends Equatable {
   const RegisterUserEntity({
     required this.id,
     required this.email,
-    required this.verifiedEmail,
-    required this.firstName,
-    required this.lastName,
-    required this.sessionToken,
+    required this.username,
+    required this.city,
+    required this.state,
+    required this.country,
   });
 
   final String id;
   final String email;
-  final bool verifiedEmail;
-  final String firstName;
-  final String lastName;
-  final String sessionToken;
+  final String username;
+  final String city;
+  final String state;
+  final String country;
 
   @override
   List<Object?> get props => [];

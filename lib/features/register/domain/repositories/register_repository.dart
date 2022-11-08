@@ -6,7 +6,9 @@ abstract class RegisterRepository {
   Future<Either<Failure, RegisterUserEntity>> registerUser({
     String email,
     String password,
-    String firstName,
-    String lastName,
+    String username,
+    String city,
+    String state,
+    String country,
   });
 }
