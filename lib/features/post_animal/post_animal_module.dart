@@ -1,4 +1,5 @@
 import 'package:find_pet/features/post_animal/presentation/bloc/post_animal_bloc.dart';
+import 'package:find_pet/features/post_animal/presentation/pages/add_photo_page.dart';
 import 'package:find_pet/features/post_animal/presentation/pages/basic_informations_page.dart';
 import 'package:find_pet/features/post_animal/presentation/pages/post_animal_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -20,6 +21,10 @@ class PostAnimalModule extends Module {
         ChildRoute<dynamic>(
           '/basic-information/',
           child: (context, args) => const BasicInformationsPage(),
+        ),
+        ChildRoute<dynamic>(
+          '/add-photo/',
+          child: (context, args) => const AddPhotoPage(),
         )
       ];
 }
