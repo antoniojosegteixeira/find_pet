@@ -17,6 +17,16 @@ class NavigationDrawer extends StatelessWidget {
             const SizedBox(
               height: 40,
             ),
+            DrawerItem(
+              name: 'Início',
+              icon: Icons.house,
+              onPressed: () {
+                Modular.to.pushNamed('/search-animals/');
+              },
+            ),
+            const SizedBox(
+              height: 30,
+            ),
             const Divider(
               thickness: 1,
               height: 10,
@@ -106,7 +116,12 @@ List<Widget> userWidgets() {
       const SizedBox(
         height: 30,
       ),
-      DrawerItem(name: 'Posts', icon: Icons.message_outlined, onPressed: () {}),
+      DrawerItem(
+          name: 'Posts',
+          icon: Icons.message_outlined,
+          onPressed: () {
+            Modular.to.pushNamed('/user-posts/');
+          }),
       const SizedBox(
         height: 30,
       ),
