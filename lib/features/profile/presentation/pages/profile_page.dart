@@ -1,4 +1,5 @@
 import 'package:find_pet/core/utils/validations.dart';
+import 'package:find_pet/core/widgets/main_button.dart';
 import 'package:find_pet/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,10 +36,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final screenHeight = (size.height - _appBar.preferredSize.height) -
-        MediaQuery.of(context).padding.top;
-
     return BlocProvider(
       create: (context) => bloc,
       child: Scaffold(
@@ -70,7 +67,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ],
                 ),
                 const Spacer(
-                  flex: 2,
+                  flex: 3,
                 ),
                 const Text(
                   'Antônio José Galvão da Cruz Teixeira',
@@ -83,21 +80,21 @@ class _ProfilePageState extends State<ProfilePage> {
                 const Text(
                   'antonioantonio@gmail.com',
                 ).body2(color: AppColors.colorNeutral_900),
-                const Spacer(flex: 2),
+                const Spacer(flex: 3),
                 const Text(
                   'Cidade',
                 ).body2(color: AppColors.colorNeutral_600),
                 const Text(
                   'Cuiabá',
                 ).body2(color: AppColors.colorNeutral_900),
-                const Spacer(flex: 2),
+                const Spacer(flex: 3),
                 const Text(
                   'Estado',
                 ).body2(color: AppColors.colorNeutral_600),
                 const Text(
                   'MT',
                 ).body2(color: AppColors.colorNeutral_900),
-                const Spacer(flex: 2),
+                const Spacer(flex: 3),
                 const Text(
                   'País',
                 ).body2(color: AppColors.colorNeutral_600),
@@ -107,8 +104,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 const Spacer(
                   flex: 20,
                 ),
-                ElevatedButton(
-                  child: const Text("Profile"),
+                MainButton(
+                  text: "Editar Informações",
                   onPressed: () {},
                 ),
               ],

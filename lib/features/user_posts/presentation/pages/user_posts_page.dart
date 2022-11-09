@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:find_pet/core/themes/ui/app_colors.dart';
-import 'package:find_pet/core/themes/ui/app_fonts.dart';
 
 class UserPostsPage extends StatefulWidget {
   const UserPostsPage({Key? key}) : super(key: key);
@@ -41,7 +40,6 @@ class _UserPostsPageState extends State<UserPostsPage> {
     return BlocProvider(
       create: (context) => bloc,
       child: Scaffold(
-        drawer: const NavigationDrawer(),
         appBar: _appBar,
         backgroundColor: AppColors.colorNeutral_50,
         body: LayoutBuilder(

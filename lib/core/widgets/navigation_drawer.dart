@@ -25,7 +25,7 @@ class NavigationDrawer extends StatelessWidget {
               },
             ),
             const SizedBox(
-              height: 30,
+              height: 20,
             ),
             const Divider(
               thickness: 1,
@@ -33,7 +33,7 @@ class NavigationDrawer extends StatelessWidget {
               color: Colors.grey,
             ),
             const SizedBox(
-              height: 30,
+              height: 20,
             ),
             ...userWidgets(),
             const Divider(
@@ -42,21 +42,23 @@ class NavigationDrawer extends StatelessWidget {
               color: Colors.grey,
             ),
             const SizedBox(
-              height: 30,
+              height: 20,
             ),
             DrawerItem(
                 name: 'Configurações', icon: Icons.settings, onPressed: () {}),
-            const SizedBox(
-              height: 30,
-            ),
-            DrawerItem(
-              name: 'Sair',
-              icon: Icons.logout,
-              onPressed: () {
-                SessionService.logout();
-                Modular.to.pushNamed('/');
-              },
-            ),
+            if (SessionService.isLogged()) ...[
+              const SizedBox(
+                height: 20,
+              ),
+              DrawerItem(
+                name: 'Sair',
+                icon: Icons.logout,
+                onPressed: () {
+                  SessionService.logout();
+                  Modular.to.pushNamed('/');
+                },
+              ),
+            ]
           ],
         ),
       ),
@@ -114,16 +116,17 @@ List<Widget> userWidgets() {
         },
       ),
       const SizedBox(
-        height: 30,
+        height: 20,
       ),
       DrawerItem(
-          name: 'Posts',
-          icon: Icons.message_outlined,
-          onPressed: () {
-            Modular.to.pushNamed('/user-posts/');
-          }),
+        name: 'Posts',
+        icon: Icons.message_outlined,
+        onPressed: () {
+          Modular.to.pushNamed('/user-posts/');
+        },
+      ),
       const SizedBox(
-        height: 30,
+        height: 20,
       ),
       DrawerItem(
         name: 'Novo Post',
@@ -133,7 +136,7 @@ List<Widget> userWidgets() {
         },
       ),
       const SizedBox(
-        height: 30,
+        height: 20,
       ),
     ];
   } else {
@@ -146,7 +149,7 @@ List<Widget> userWidgets() {
         },
       ),
       const SizedBox(
-        height: 30,
+        height: 20,
       ),
       DrawerItem(
         name: 'Criar Conta',
@@ -156,7 +159,7 @@ List<Widget> userWidgets() {
         },
       ),
       const SizedBox(
-        height: 30,
+        height: 20,
       ),
     ];
   }
