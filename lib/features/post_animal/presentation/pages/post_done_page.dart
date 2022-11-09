@@ -61,7 +61,7 @@ class _PostDonePageState extends State<PostDonePage> {
                   disabled: false,
                   text: 'Próximo',
                   onPressed: () {
-                    Modular.to.pushNamed('/post-animal/add-localization/');
+                    Modular.to.pushReplacementNamed('/user-posts/');
                   },
                   backgroundColor: AppColors.colorGreenSuccess_300,
                 ),

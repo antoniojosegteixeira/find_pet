@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
         backgroundColor: AppColors.colorNeutral_50,
         appBarTheme: AppBarTheme(
           elevation: 0,
-          backgroundColor: Colors.white,
-          foregroundColor: AppColors.colorDarkBlue_900,
+          backgroundColor: AppColors.colorDarkBlue_800,
+          foregroundColor: Colors.white,
         ),
         colorScheme: ColorScheme.fromSwatch(
           accentColor: const Color(0xFFF3F4F9),
