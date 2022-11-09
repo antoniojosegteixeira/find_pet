@@ -21,15 +21,18 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   void initState() {
-    cubit = Modular.get<ProfileBloc>();
+    bloc = Modular.get<ProfileBloc>();
     super.initState();
   }
 
-  final AppBar _appBar = AppBar();
-  bool _showPassword = false;
-  late final ProfileBloc cubit;
-  final _emailController = TextEditingController();
-  final _passController = TextEditingController();
+  final AppBar _appBar = AppBar(
+    title: const Text(
+      'Minha Conta',
+    ),
+    centerTitle: true,
+  );
+  late final ProfileBloc bloc;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -37,7 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
         MediaQuery.of(context).padding.top;
 
     return BlocProvider(
-      create: (context) => cubit,
+      create: (context) => bloc,
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: _appBar,
@@ -48,62 +51,59 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 110,
+                      width: 110,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        color: AppColors.colorNeutral_200,
+                      ),
+                      child: Icon(
+                        Icons.person,
+                        size: 60,
+                        color: AppColors.colorNeutral_600,
+                      ),
+                    ),
+                  ],
+                ),
                 const Spacer(
                   flex: 2,
                 ),
-                const Text('Profile').headline3(),
-                const Spacer(),
                 const Text(
-                  'Now use your email and password to access your account. ',
+                  'Antônio José Galvão da Cruz Teixeira',
+                  textAlign: TextAlign.center,
+                ).headline4(),
+                const Spacer(flex: 3),
+                const Text(
+                  'Email',
                 ).body2(color: AppColors.colorNeutral_600),
-                const Spacer(),
-                TextFormField(
-                  controller: _emailController,
-                  keyboardType: TextInputType.visiblePassword,
-                  decoration: const InputDecoration(
-                    hintText: 'E-mail',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.elliptical(
-                          8,
-                          8,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: screenHeight / 70,
-                ),
-                TextFormField(
-                  controller: _passController,
-                  keyboardType: TextInputType.visiblePassword,
-                  obscureText: _showPassword == false ? true : false,
-                  decoration: InputDecoration(
-                    hintText: 'Password',
-                    suffixIcon: GestureDetector(
-                      child: Icon(
-                        _showPassword == false
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                      ),
-                      onTap: () {
-                        setState(() {
-                          _showPassword = !_showPassword;
-                        });
-                      },
-                    ),
-                    border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.elliptical(
-                          8,
-                          8,
-                        ),
-                      ),
-                    ),
-                  ),
-                  validator: Validations.validatePasscode,
-                ),
+                const Text(
+                  'antonioantonio@gmail.com',
+                ).body2(color: AppColors.colorNeutral_900),
+                const Spacer(flex: 2),
+                const Text(
+                  'Cidade',
+                ).body2(color: AppColors.colorNeutral_600),
+                const Text(
+                  'Cuiabá',
+                ).body2(color: AppColors.colorNeutral_900),
+                const Spacer(flex: 2),
+                const Text(
+                  'Estado',
+                ).body2(color: AppColors.colorNeutral_600),
+                const Text(
+                  'MT',
+                ).body2(color: AppColors.colorNeutral_900),
+                const Spacer(flex: 2),
+                const Text(
+                  'País',
+                ).body2(color: AppColors.colorNeutral_600),
+                const Text(
+                  'Brasil',
+                ).body2(color: AppColors.colorNeutral_900),
                 const Spacer(
                   flex: 20,
                 ),
