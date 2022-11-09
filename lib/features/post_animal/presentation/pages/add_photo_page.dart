@@ -67,9 +67,12 @@ class _AddPhotoPageState extends State<AddPhotoPage> {
                           ),
                           const SizedBox(height: 17),
                           MainButton(
-                            disabled: true,
+                            disabled: false,
                             text: 'Próximo',
-                            onPressed: () {},
+                            onPressed: () {
+                              Modular.to
+                                  .pushNamed('/post-animal/add-localization/');
+                            },
                             backgroundColor: AppColors.colorGreenSuccess_300,
                           ),
                           const SizedBox(
