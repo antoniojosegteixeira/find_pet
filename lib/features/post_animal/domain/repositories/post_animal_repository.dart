@@ -5,11 +5,15 @@ import 'package:find_pet/features/post_animal/domain/entities/post_animal_entity
 abstract class PostAnimalRepository {
   Future<Either<Failure, PostAnimalEntity>> postAnimal({
     String? name,
+    String? age,
     String? sex,
     required String species,
     String? breed,
     required String color,
-    String? age,
-    String? image,
+    required String contact,
+    required String city,
+    required String countrystate,
+    required String address,
+    required String postType,
   });
 }

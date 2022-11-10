@@ -40,6 +40,7 @@ class _UserPostsPageState extends State<UserPostsPage> {
     return BlocProvider(
       create: (context) => bloc,
       child: Scaffold(
+        drawer: const NavigationDrawer(),
         appBar: _appBar,
         backgroundColor: AppColors.colorNeutral_50,
         body: LayoutBuilder(

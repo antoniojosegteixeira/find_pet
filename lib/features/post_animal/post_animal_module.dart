@@ -1,3 +1,7 @@
+import 'package:find_pet/features/list_animals/domain/usecases/list_animals_usecase.dart';
+import 'package:find_pet/features/post_animal/data/datasources/post_animal_datasource.dart';
+import 'package:find_pet/features/post_animal/data/repositories/post_animal_repository_impl.dart';
+import 'package:find_pet/features/post_animal/domain/usecases/post_animal_usecase.dart';
 import 'package:find_pet/features/post_animal/presentation/bloc/post_animal_bloc.dart';
 import 'package:find_pet/features/post_animal/presentation/pages/add_photo_page.dart';
 import 'package:find_pet/features/post_animal/presentation/pages/basic_informations_page.dart';
@@ -11,7 +15,10 @@ class PostAnimalModule extends Module {
   @override
   List<Bind> get binds => [
         Bind.singleton((i) => http.Client()),
-        Bind.factory((i) => PostAnimalBloc())
+        Bind.singleton((i) => PostAnimalDatasourceImpl(client: i())),
+        Bind.singleton((i) => PostAnimalRepositoryImpl(remoteDatasource: i())),
+        Bind.singleton((i) => PostAnimalUseCase(repository: i())),
+        Bind.singleton((i) => PostAnimalBloc(usecase: i()))
       ];
 
   @override

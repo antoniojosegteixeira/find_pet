@@ -6,6 +6,7 @@ import 'package:find_pet/features/post_animal/presentation/bloc/post_animal_bloc
 import 'package:find_pet/features/post_animal/presentation/widgets/Dropdown.dart';
 import 'package:find_pet/features/post_animal/presentation/widgets/filled_input.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class BasicInformationsPage extends StatefulWidget {
@@ -18,10 +19,6 @@ class BasicInformationsPage extends StatefulWidget {
 class _BasicInformationsPageState extends State<BasicInformationsPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final bloc = Modular.get<PostAnimalBloc>();
-
-  final _nameController = TextEditingController();
-  final _breedController = TextEditingController();
-  final _colorController = TextEditingController();
 
   final List<String> species = [
     "Cão",
@@ -45,18 +42,21 @@ class _BasicInformationsPageState extends State<BasicInformationsPage> {
   String? selectedSex;
   String? selectedAge;
 
+  late final TextEditingController _nameController;
+  late final TextEditingController _breedController;
+  late final TextEditingController _colorController;
+
   final _appBar = AppBar(
     backgroundColor: AppColors.colorDarkBlue_800,
     foregroundColor: Colors.white,
   );
 
-  void addInformationToBloc() {
-    if (selectedSpecies != null) bloc.species = selectedSpecies as String;
-    if (selectedSex != null) bloc.sex = selectedSex as String;
-    if (selectedAge != null) bloc.age = selectedAge as String;
-    bloc.name = _nameController.text;
-    bloc.breed = _breedController.text;
-    bloc.color = _colorController.text;
+  @override
+  void initState() {
+    _nameController = TextEditingController(text: bloc.name);
+    _breedController = TextEditingController(text: bloc.breed);
+    _colorController = TextEditingController(text: bloc.color);
+    super.initState();
   }
 
   @override
@@ -99,13 +99,10 @@ class _BasicInformationsPageState extends State<BasicInformationsPage> {
                           const SizedBox(height: 17),
                           Center(
                             child: Dropdown(
-                              currentValue: selectedSpecies,
+                              currentValue: bloc.species,
                               onChanged: (value) {
-                                setState(
-                                  () {
-                                    selectedSpecies = value;
-                                  },
-                                );
+                                bloc.species = value;
+                                setState(() {});
                               },
                               items: species,
                             ),
@@ -115,13 +112,10 @@ class _BasicInformationsPageState extends State<BasicInformationsPage> {
                           const SizedBox(height: 17),
                           Center(
                             child: Dropdown(
-                              currentValue: selectedSex,
+                              currentValue: bloc.sex,
                               onChanged: (value) {
-                                setState(
-                                  () {
-                                    selectedSex = value;
-                                  },
-                                );
+                                bloc.sex = value;
+                                setState(() {});
                               },
                               items: sex,
                             ),
@@ -157,26 +151,26 @@ class _BasicInformationsPageState extends State<BasicInformationsPage> {
                           const SizedBox(height: 17),
                           Center(
                             child: Dropdown(
-                              currentValue: selectedAge,
+                              currentValue: bloc.age,
                               onChanged: (value) {
-                                setState(
-                                  () {
-                                    selectedAge = value;
-                                  },
-                                );
+                                bloc.age = value;
+                                setState(() {});
                               },
                               items: ages,
                             ),
                           ),
                           const SizedBox(height: 30),
                           MainButton(
-                            disabled: (selectedSpecies == null &&
+                            disabled: (bloc.species == null &&
                                 _colorController.text.isEmpty),
                             text: 'Próximo',
                             onPressed: () {
-                              if (selectedSpecies != null &&
-                                  _colorController.text.isNotEmpty) {
-                                addInformationToBloc();
+                              bloc.name = _nameController.text;
+                              bloc.breed = _breedController.text;
+                              bloc.color = _colorController.text;
+
+                              if (bloc.species != null &&
+                                  _formKey.currentState!.validate()) {
                                 Modular.to.pushNamed('/post-animal/add-photo/');
                               }
                             },

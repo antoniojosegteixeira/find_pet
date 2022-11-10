@@ -8,8 +8,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SessionService.init();
 
-  SessionService.init();
   bootstrap(() => const MyApp());
 }
 

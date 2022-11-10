@@ -21,7 +21,6 @@ class _PostAnimalPageState extends State<PostAnimalPage> {
     "Encontrei um animal",
     "Estou buscando um animal",
   ];
-  String? selectedValue;
 
   final _appBar = AppBar(
     backgroundColor: AppColors.colorDarkBlue_800,
@@ -74,22 +73,20 @@ class _PostAnimalPageState extends State<PostAnimalPage> {
                           const SizedBox(height: 30),
                           Center(
                               child: Dropdown(
-                            currentValue: selectedValue,
+                            currentValue: bloc.postType,
                             onChanged: (value) {
+                              bloc.postType = value;
                               setState(
-                                () {
-                                  selectedValue = value;
-                                },
+                                () {},
                               );
                             },
                             items: items,
                           )),
                           const Spacer(),
                           MainButton(
-                            disabled: selectedValue == null,
+                            disabled: bloc.postType == null,
                             text: 'Próximo',
                             onPressed: () {
-                              bloc.postType = transformOption(selectedValue);
                               Modular.to
                                   .pushNamed('/post-animal/basic-information/');
                             },

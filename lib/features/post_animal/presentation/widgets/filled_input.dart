@@ -8,16 +8,19 @@ class FilledInput extends StatelessWidget {
     required this.hint,
     this.validator,
     this.maxLines,
+    this.onEditingComplete,
   }) : super(key: key);
 
   final TextEditingController controller;
   final String hint;
   final String? Function(String?)? validator;
   final int? maxLines;
+  final Function()? onEditingComplete;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onEditingComplete: onEditingComplete,
       maxLines: maxLines,
       controller: controller,
       keyboardType: TextInputType.visiblePassword,

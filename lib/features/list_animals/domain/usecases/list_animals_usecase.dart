@@ -2,19 +2,20 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:find_pet/core/error/failures.dart';
 import 'package:find_pet/core/usecase/usecase.dart';
-import 'package:find_pet/features/post_animal/domain/entities/post_animal_entity.dart';
-import 'package:find_pet/features/post_animal/domain/repositories/post_animal_repository.dart';
+import 'package:find_pet/features/list_animals/domain/entities/list_animals_page_entity.dart';
+import 'package:find_pet/features/list_animals/domain/repositories/list_animals_repository.dart';
 
-class PostAnimalUseCase implements UseCase<PostAnimalEntity, PostAnimalParams> {
-  PostAnimalUseCase({required this.repository});
+class ListAnimalsUsecase
+    implements UseCase<ListAnimalsPageEntity, ListAnimalsParams> {
+  ListAnimalsUsecase({required this.repository});
 
-  final PostAnimalRepository repository;
+  final ListAnimalsRepository repository;
 
   @override
-  Future<Either<Failure, PostAnimalEntity>> call(
-    PostAnimalParams params,
+  Future<Either<Failure, ListAnimalsPageEntity>> call(
+    ListAnimalsParams params,
   ) async {
-    return repository.postAnimal(
+    return repository.listAnimals(
       name: params.name!,
       sex: params.sex!,
       species: params.species,
@@ -25,8 +26,8 @@ class PostAnimalUseCase implements UseCase<PostAnimalEntity, PostAnimalParams> {
   }
 }
 
-class PostAnimalParams extends Equatable {
-  const PostAnimalParams({
+class ListAnimalsParams extends Equatable {
+  const ListAnimalsParams({
     this.name,
     this.sex,
     required this.species,

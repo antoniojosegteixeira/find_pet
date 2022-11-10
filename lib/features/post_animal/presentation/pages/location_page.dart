@@ -6,6 +6,7 @@ import 'package:find_pet/features/post_animal/presentation/bloc/post_animal_bloc
 import 'package:find_pet/features/post_animal/presentation/widgets/Dropdown.dart';
 import 'package:find_pet/features/post_animal/presentation/widgets/filled_input.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class LocationPage extends StatefulWidget {
@@ -17,11 +18,20 @@ class LocationPage extends StatefulWidget {
 
 class _LocationPageState extends State<LocationPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final bloc = Modular.get<PostAnimalBloc>();
+  late final PostAnimalBloc bloc;
 
-  final _cityController = TextEditingController();
-  final _addressController = TextEditingController();
-  final _contactController = TextEditingController();
+  late final TextEditingController _cityController;
+  late final TextEditingController _addressController;
+  late final TextEditingController _contactController;
+
+  @override
+  void initState() {
+    super.initState();
+    bloc = Modular.get<PostAnimalBloc>();
+    _cityController = TextEditingController(text: bloc.city);
+    _addressController = TextEditingController(text: bloc.address);
+    _contactController = TextEditingController(text: bloc.contact);
+  }
 
   final List<String> countrystates = [
     'Acre',
@@ -53,19 +63,10 @@ class _LocationPageState extends State<LocationPage> {
     'Tocantins',
   ];
 
-  String? selectedState;
-
   final _appBar = AppBar(
     backgroundColor: AppColors.colorDarkBlue_800,
     foregroundColor: Colors.white,
   );
-
-  void addInformationToBloc() {
-    if (selectedState != null) bloc.species = selectedState as String;
-    bloc.contact = _contactController.text;
-    bloc.address = _addressController.text;
-    bloc.city = _cityController.text;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,105 +78,117 @@ class _LocationPageState extends State<LocationPage> {
       resizeToAvoidBottomInset: true,
       backgroundColor: AppColors.colorDarkBlue_800,
       appBar: _appBar,
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          return SafeArea(
-            child: SizedBox(
-              height: screenHeight,
-              child: Form(
-                key: _formKey,
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                    child: SizedBox(
-                      height: screenHeight,
-                      child: ListView(
-                        children: [
-                          const SizedBox(height: 46),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: const Text(
-                              'Localização e Contato',
-                            ).headline3(
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 40),
-                          labelText('Estado', true),
-                          const SizedBox(height: 17),
-                          Center(
-                            child: Dropdown(
-                              currentValue: selectedState,
-                              onChanged: (value) {
-                                setState(
-                                  () {
-                                    selectedState = value;
+      body: BlocProvider.value(
+        value: bloc,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SafeArea(
+              child: BlocBuilder<PostAnimalBloc, PostAnimalState>(
+                builder: (context, state) {
+                  if (state is PostAnimalDone) {
+                    Modular.to.navigate('/post-animal/post-done/');
+                  }
+                  return SizedBox(
+                    height: screenHeight,
+                    child: Form(
+                      key: _formKey,
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                          child: SizedBox(
+                            height: screenHeight,
+                            child: ListView(
+                              children: [
+                                const SizedBox(height: 46),
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: const Text(
+                                    'Localização e Contato',
+                                  ).headline3(
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 40),
+                                labelText('Estado', true),
+                                const SizedBox(height: 17),
+                                Center(
+                                  child: Dropdown(
+                                    currentValue: bloc.countrystate,
+                                    onChanged: (value) {
+                                      bloc.countrystate = value;
+                                      setState(() {});
+                                    },
+                                    items: countrystates,
+                                  ),
+                                ),
+                                const SizedBox(height: 20),
+                                labelText(
+                                  'Adicione a cidade',
+                                  true,
+                                ),
+                                const SizedBox(height: 17),
+                                FilledInput(
+                                  controller: _cityController,
+                                  validator: Validations.validateRequired,
+                                  hint: 'Cidade',
+                                ),
+                                const SizedBox(height: 20),
+                                labelText(
+                                  'Adicione o endereço',
+                                  true,
+                                ),
+                                const SizedBox(height: 17),
+                                FilledInput(
+                                  controller: _addressController,
+                                  validator: Validations.validateRequired,
+                                  hint: 'Endereço',
+                                  maxLines: 3,
+                                ),
+                                const SizedBox(height: 20),
+                                labelText(
+                                  'Adicione informações de contato: telefone, redes sociais, etc',
+                                  true,
+                                ),
+                                const SizedBox(height: 17),
+                                FilledInput(
+                                  controller: _contactController,
+                                  hint: 'Informações de Contato',
+                                  validator: Validations.validateRequired,
+                                  maxLines: 3,
+                                ),
+                                const SizedBox(height: 20),
+                                const SizedBox(height: 30),
+                                MainButton(
+                                  disabled: false,
+                                  text: 'Enviar',
+                                  backgroundColor:
+                                      AppColors.colorGreenSuccess_300,
+                                  onPressed: () {
+                                    bloc.city = _cityController.text;
+                                    bloc.address = _addressController.text;
+                                    bloc.contact = _contactController.text;
+
+                                    print(bloc.isClosed);
+                                    bloc.add(PostAnimal());
                                   },
-                                );
-                              },
-                              items: countrystates,
+                                ),
+                                const SizedBox(
+                                  height: 26,
+                                ),
+                              ],
                             ),
                           ),
-                          const SizedBox(height: 20),
-                          labelText(
-                            'Adicione a cidade',
-                            true,
-                          ),
-                          const SizedBox(height: 17),
-                          FilledInput(
-                            controller: _cityController,
-                            validator: Validations.validateRequired,
-                            hint: 'Cidade',
-                          ),
-                          const SizedBox(height: 20),
-                          labelText(
-                            'Adicione o endereço',
-                            true,
-                          ),
-                          const SizedBox(height: 17),
-                          FilledInput(
-                            controller: _addressController,
-                            validator: Validations.validateRequired,
-                            hint: 'Endereço',
-                            maxLines: 3,
-                          ),
-                          const SizedBox(height: 20),
-                          labelText(
-                            'Adicione informações de contato: telefone, redes sociais, etc',
-                            true,
-                          ),
-                          const SizedBox(height: 17),
-                          FilledInput(
-                            controller: _contactController,
-                            hint: 'Informações de Contato',
-                            validator: Validations.validateRequired,
-                            maxLines: 3,
-                          ),
-                          const SizedBox(height: 20),
-                          const SizedBox(height: 30),
-                          MainButton(
-                            disabled: false,
-                            text: 'Próximo',
-                            onPressed: () {
-                              addInformationToBloc();
-                              Modular.to.navigate('/post-animal/post-done/');
-                            },
-                            backgroundColor: AppColors.colorGreenSuccess_300,
-                          ),
-                          const SizedBox(
-                            height: 26,
-                          ),
-                        ],
+                        ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

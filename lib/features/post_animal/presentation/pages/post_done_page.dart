@@ -14,7 +14,6 @@ class PostDonePage extends StatefulWidget {
 }
 
 class _PostDonePageState extends State<PostDonePage> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final bloc = Modular.get<PostAnimalBloc>();
 
   final _appBar = AppBar(

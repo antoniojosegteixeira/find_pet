@@ -14,22 +14,31 @@ class PostAnimalRepositoryImpl implements PostAnimalRepository {
   @override
   Future<Either<Failure, PostAnimalModel>> postAnimal({
     String? name,
+    String? age,
     String? sex,
     required String species,
     String? breed,
     required String color,
-    String? age,
-    String? image,
+    required String contact,
+    required String city,
+    required String countrystate,
+    required String address,
+    required String postType,
   }) async {
     try {
       final response = await remoteDatasource.postAnimal(
-          name: name!,
-          sex: sex!,
-          species: species,
-          breed: breed!,
-          color: color,
-          age: age!,
-          image: image!);
+        name: name!,
+        age: age!,
+        sex: sex!,
+        species: species,
+        breed: breed!,
+        color: color,
+        contact: contact,
+        city: city,
+        countrystate: countrystate,
+        address: address,
+        postType: postType,
+      );
       return Right(response);
     } catch (err) {
       return Left(ServerFailure());
