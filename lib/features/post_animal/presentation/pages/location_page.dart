@@ -5,6 +5,7 @@ import 'package:find_pet/core/widgets/main_button.dart';
 import 'package:find_pet/features/post_animal/presentation/bloc/post_animal_bloc.dart';
 import 'package:find_pet/features/post_animal/presentation/widgets/Dropdown.dart';
 import 'package:find_pet/features/post_animal/presentation/widgets/filled_input.dart';
+import 'package:find_pet/features/post_animal/presentation/widgets/label_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -111,7 +112,10 @@ class _LocationPageState extends State<LocationPage> {
                                   ),
                                 ),
                                 const SizedBox(height: 40),
-                                labelText('Estado', true),
+                                const LabelText(
+                                  text: 'Estado',
+                                  isRequired: true,
+                                ),
                                 const SizedBox(height: 17),
                                 Center(
                                   child: Dropdown(
@@ -124,9 +128,9 @@ class _LocationPageState extends State<LocationPage> {
                                   ),
                                 ),
                                 const SizedBox(height: 20),
-                                labelText(
-                                  'Adicione a cidade',
-                                  true,
+                                const LabelText(
+                                  text: 'Adicione a cidade',
+                                  isRequired: true,
                                 ),
                                 const SizedBox(height: 17),
                                 FilledInput(
@@ -135,9 +139,9 @@ class _LocationPageState extends State<LocationPage> {
                                   hint: 'Cidade',
                                 ),
                                 const SizedBox(height: 20),
-                                labelText(
-                                  'Adicione o endereço',
-                                  true,
+                                const LabelText(
+                                  text: 'Adicione o endereço',
+                                  isRequired: true,
                                 ),
                                 const SizedBox(height: 17),
                                 FilledInput(
@@ -147,9 +151,10 @@ class _LocationPageState extends State<LocationPage> {
                                   maxLines: 3,
                                 ),
                                 const SizedBox(height: 20),
-                                labelText(
-                                  'Adicione informações de contato: telefone, redes sociais, etc',
-                                  true,
+                                const LabelText(
+                                  text:
+                                      'Adicione informações de contato: telefone, redes sociais, etc',
+                                  isRequired: true,
                                 ),
                                 const SizedBox(height: 17),
                                 FilledInput(
@@ -202,37 +207,4 @@ String transformOption(text) {
   }
 
   return 'lost';
-}
-
-Widget labelText(String text, bool isRequired) {
-  return Align(
-    alignment: Alignment.centerLeft,
-    child: RichText(
-      text: TextSpan(
-        children: <TextSpan>[
-          TextSpan(
-            text: text,
-            style: const TextStyle(
-              fontFamily: 'bodyfont',
-              fontSize: 18,
-              color: Colors.white,
-              fontWeight: FontWeight.w400,
-              height: 1.25,
-            ),
-          ),
-          if (isRequired) ...[
-            const TextSpan(
-              text: ' *',
-              style: TextStyle(
-                fontFamily: 'bodyfont',
-                fontSize: 20,
-                color: Colors.red,
-                height: 0.8,
-              ),
-            ),
-          ]
-        ],
-      ),
-    ),
-  );
 }

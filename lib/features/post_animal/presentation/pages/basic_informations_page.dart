@@ -5,6 +5,7 @@ import 'package:find_pet/core/widgets/main_button.dart';
 import 'package:find_pet/features/post_animal/presentation/bloc/post_animal_bloc.dart';
 import 'package:find_pet/features/post_animal/presentation/widgets/Dropdown.dart';
 import 'package:find_pet/features/post_animal/presentation/widgets/filled_input.dart';
+import 'package:find_pet/features/post_animal/presentation/widgets/label_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -95,7 +96,10 @@ class _BasicInformationsPageState extends State<BasicInformationsPage> {
                             ),
                           ),
                           const SizedBox(height: 40),
-                          labelText('Qual é a espécie do animal?', true),
+                          const LabelText(
+                            text: 'Qual é a espécie do animal?',
+                            isRequired: true,
+                          ),
                           const SizedBox(height: 17),
                           Center(
                             child: Dropdown(
@@ -108,7 +112,10 @@ class _BasicInformationsPageState extends State<BasicInformationsPage> {
                             ),
                           ),
                           const SizedBox(height: 20),
-                          labelText('Qual o sexo do animal?', false),
+                          const LabelText(
+                            text: 'Qual o sexo do animal?',
+                            isRequired: false,
+                          ),
                           const SizedBox(height: 17),
                           Center(
                             child: Dropdown(
@@ -121,9 +128,10 @@ class _BasicInformationsPageState extends State<BasicInformationsPage> {
                             ),
                           ),
                           const SizedBox(height: 20),
-                          labelText(
-                            'O animal possui algum tipo de identificação (coleira com nome por exemplo)?',
-                            false,
+                          const LabelText(
+                            text:
+                                'O animal possui algum tipo de identificação (coleira com nome por exemplo)?',
+                            isRequired: false,
                           ),
                           const SizedBox(height: 17),
                           FilledInput(
@@ -131,14 +139,20 @@ class _BasicInformationsPageState extends State<BasicInformationsPage> {
                             hint: 'Nome',
                           ),
                           const SizedBox(height: 20),
-                          labelText('Possui raça definida?', false),
+                          const LabelText(
+                            text: 'Possui raça definida? Se sim, qual?',
+                            isRequired: false,
+                          ),
                           const SizedBox(height: 17),
                           FilledInput(
                             controller: _breedController,
                             hint: 'Raça',
                           ),
                           const SizedBox(height: 20),
-                          labelText('Qual a cor do animal?', true),
+                          const LabelText(
+                            text: 'Qual a cor do animal?',
+                            isRequired: true,
+                          ),
                           const SizedBox(height: 17),
                           FilledInput(
                             controller: _colorController,
@@ -146,7 +160,10 @@ class _BasicInformationsPageState extends State<BasicInformationsPage> {
                             validator: Validations.validateRequired,
                           ),
                           const SizedBox(height: 20),
-                          labelText('Qual a idade aparente do animal?', true),
+                          const LabelText(
+                            text: 'Qual a idade aparente do animal?',
+                            isRequired: true,
+                          ),
                           const SizedBox(height: 17),
                           Center(
                             child: Dropdown(
@@ -200,37 +217,4 @@ String transformOption(text) {
   }
 
   return 'lost';
-}
-
-Widget labelText(String text, bool isRequired) {
-  return Align(
-    alignment: Alignment.centerLeft,
-    child: RichText(
-      text: TextSpan(
-        children: <TextSpan>[
-          TextSpan(
-            text: text,
-            style: const TextStyle(
-              fontFamily: 'bodyfont',
-              fontSize: 18,
-              color: Colors.white,
-              fontWeight: FontWeight.w400,
-              height: 1.25,
-            ),
-          ),
-          if (isRequired) ...[
-            const TextSpan(
-              text: ' *',
-              style: TextStyle(
-                fontFamily: 'bodyfont',
-                fontSize: 20,
-                color: Colors.red,
-                height: 0.8,
-              ),
-            ),
-          ]
-        ],
-      ),
-    ),
-  );
 }
