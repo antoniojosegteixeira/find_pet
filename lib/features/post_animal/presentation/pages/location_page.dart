@@ -161,17 +161,19 @@ class _LocationPageState extends State<LocationPage> {
                                 const SizedBox(height: 20),
                                 const SizedBox(height: 30),
                                 MainButton(
-                                  disabled: false,
+                                  disabled: bloc.countrystate == null,
                                   text: 'Enviar',
                                   backgroundColor:
                                       AppColors.colorGreenSuccess_300,
                                   onPressed: () {
-                                    bloc.city = _cityController.text;
-                                    bloc.address = _addressController.text;
-                                    bloc.contact = _contactController.text;
+                                    if (bloc.countrystate != null &&
+                                        _formKey.currentState!.validate()) {
+                                      bloc.city = _cityController.text;
+                                      bloc.address = _addressController.text;
+                                      bloc.contact = _contactController.text;
 
-                                    print(bloc.isClosed);
-                                    bloc.add(PostAnimal());
+                                      bloc.add(PostAnimal());
+                                    }
                                   },
                                 ),
                                 const SizedBox(

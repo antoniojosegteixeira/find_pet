@@ -36,7 +36,7 @@ class PostAnimalBloc extends Bloc<PostAnimalEvent, PostAnimalState> {
                 name: name,
                 species: species as String,
                 breed: breed,
-                sex: sex,
+                sex: sex ?? '',
                 age: age,
                 color: color,
                 contact: contact,

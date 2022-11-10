@@ -128,7 +128,6 @@ class _BasicInformationsPageState extends State<BasicInformationsPage> {
                           const SizedBox(height: 17),
                           FilledInput(
                             controller: _nameController,
-                            validator: Validations.validateRequired,
                             hint: 'Nome',
                           ),
                           const SizedBox(height: 20),
@@ -147,7 +146,7 @@ class _BasicInformationsPageState extends State<BasicInformationsPage> {
                             validator: Validations.validateRequired,
                           ),
                           const SizedBox(height: 20),
-                          labelText('Qual a idade aparente do animal?', false),
+                          labelText('Qual a idade aparente do animal?', true),
                           const SizedBox(height: 17),
                           Center(
                             child: Dropdown(
@@ -161,8 +160,9 @@ class _BasicInformationsPageState extends State<BasicInformationsPage> {
                           ),
                           const SizedBox(height: 30),
                           MainButton(
-                            disabled: (bloc.species == null &&
-                                _colorController.text.isEmpty),
+                            disabled: (bloc.species == null ||
+                                _colorController.text.isEmpty ||
+                                bloc.age == null),
                             text: 'Próximo',
                             onPressed: () {
                               bloc.name = _nameController.text;
@@ -170,7 +170,8 @@ class _BasicInformationsPageState extends State<BasicInformationsPage> {
                               bloc.color = _colorController.text;
 
                               if (bloc.species != null &&
-                                  _formKey.currentState!.validate()) {
+                                  _formKey.currentState!.validate() &&
+                                  bloc.age != null) {
                                 Modular.to.pushNamed('/post-animal/add-photo/');
                               }
                             },

@@ -17,7 +17,7 @@ class PostAnimalUseCase implements UseCase<PostAnimalEntity, PostAnimalParams> {
     return repository.postAnimal(
       name: params.name!,
       age: params.age!,
-      sex: params.sex!,
+      sex: params.sex,
       species: params.species,
       breed: params.breed!,
       color: params.color,
