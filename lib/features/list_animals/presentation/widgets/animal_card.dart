@@ -5,6 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 class AnimalCard extends StatelessWidget {
   const AnimalCard({
     Key? key,
+    required this.id,
     this.name,
     required this.species,
     required this.age,
@@ -14,6 +15,7 @@ class AnimalCard extends StatelessWidget {
     required this.state,
   }) : super(key: key);
 
+  final String id;
   final String? name;
   final String species;
   final String age;
@@ -21,8 +23,6 @@ class AnimalCard extends StatelessWidget {
   final String color;
   final String city;
   final String state;
-
-  final String mockPostId = '912h89dha812j';
 
   String createNameOrIdentification() {
     if (name != null) {
@@ -36,7 +36,7 @@ class AnimalCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Modular.to.pushNamed('/search-animals/details/$mockPostId');
+        Modular.to.pushNamed('/animal-detail/$id');
       },
       child: SizedBox(
         width: MediaQuery.of(context).size.width / 2 - 50,

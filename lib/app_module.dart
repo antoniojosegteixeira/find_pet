@@ -1,4 +1,5 @@
 import 'package:find_pet/core/hive/services/session.service.dart';
+import 'package:find_pet/features/animal_detail/animal_detail_module.dart';
 import 'package:find_pet/features/choose_service/choose_service_module.dart';
 import 'package:find_pet/features/list_animals/search_animals_module.dart';
 import 'package:find_pet/features/login/login_module.dart';
@@ -25,6 +26,7 @@ class AppModule extends Module {
         ModuleRoute<dynamic>('/login/', module: LoginModule()),
         ModuleRoute<dynamic>('/choose-service/', module: ChooseServiceModule()),
         ModuleRoute<dynamic>('/search-animals/', module: SearchAnimalsModule()),
+        ModuleRoute<dynamic>('/animal-detail/', module: AnimalDetailModule()),
         ModuleRoute<dynamic>('/post-animal/', module: PostAnimalModule()),
         ModuleRoute<dynamic>('/profile/', module: ProfileModule()),
         ModuleRoute<dynamic>('/user-posts/', module: UserPostsModule()),

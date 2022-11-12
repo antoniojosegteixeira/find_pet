@@ -22,6 +22,7 @@ class ListSuccessPage extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         final result = listAnimalsPage.results[index];
         return AnimalCard(
+          id: result.id.toString(),
           species: result.species,
           age: result.age,
           breed: result.breed ?? 'Não consta',

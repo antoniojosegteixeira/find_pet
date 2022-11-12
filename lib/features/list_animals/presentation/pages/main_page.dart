@@ -34,8 +34,8 @@ class _MainPageState extends State<MainPage> {
         backgroundColor: AppColors.colorDarkBlue_800,
       ),
       body: SafeArea(
-        child: BlocProvider(
-          create: (context) => bloc,
+        child: BlocProvider.value(
+          value: bloc,
           child: Center(
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 600),
@@ -46,7 +46,7 @@ class _MainPageState extends State<MainPage> {
                     height: 65,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
+                      children: const [
                         SearchField(),
                       ],
                     ),

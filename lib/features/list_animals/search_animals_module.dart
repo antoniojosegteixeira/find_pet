@@ -2,7 +2,6 @@ import 'package:find_pet/features/list_animals/data/datasources/list_animals_dat
 import 'package:find_pet/features/list_animals/data/repositories/list_animals_repository_impl.dart';
 import 'package:find_pet/features/list_animals/domain/usecases/list_animals_usecase.dart';
 import 'package:find_pet/features/list_animals/presentation/bloc/list_animals_bloc.dart';
-import 'package:find_pet/features/list_animals/presentation/pages/animal_details_page.dart';
 import 'package:find_pet/features/list_animals/presentation/pages/main_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:http/http.dart' as http;
@@ -22,11 +21,6 @@ class SearchAnimalsModule extends Module {
         ChildRoute<dynamic>(
           '/',
           child: (context, args) => const MainPage(),
-        ),
-        ChildRoute<dynamic>(
-          '/details/:postId',
-          child: (context, args) =>
-              AnimalDetailsPage(postId: args.params['postId']),
         ),
       ];
 }
