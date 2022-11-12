@@ -6,9 +6,9 @@ abstract class ListAnimalsRepository {
   Future<Either<Failure, ListAnimalsPageEntity>> listAnimals({
     String? name,
     String? sex,
-    required String species,
+    String? species,
     String? breed,
-    required String color,
+    String? color,
     String? age,
   });
 }

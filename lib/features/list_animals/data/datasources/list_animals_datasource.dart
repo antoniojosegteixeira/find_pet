@@ -23,14 +23,14 @@ class ListAnimalsDatasourceImpl implements ListAnimalsDatasource {
   Future<ListAnimalsPageModel> listAnimals({
     String? name,
     String? sex,
-    required String species,
+    String? species,
     String? breed,
-    required String color,
+    String? color,
     String? age,
   }) async {
-    final response = await client.post(
+    final response = await client.get(
       Uri.parse(
-        'http://192.168.0.4:5000/post-animal',
+        'http://192.168.15.20:8000/posts/',
       ),
       headers: <String, String>{
         'content-type': 'application/json',
@@ -38,6 +38,7 @@ class ListAnimalsDatasourceImpl implements ListAnimalsDatasource {
         'Connection': 'keep-alive',
         'Accept-Encoding': 'gzip, deflate, br',
       },
+      /*
       body: jsonEncode(<String, String>{
         'name': name!,
         'sex': sex!,
@@ -46,7 +47,10 @@ class ListAnimalsDatasourceImpl implements ListAnimalsDatasource {
         'color': color,
         'age': age!,
       }),
+      */
     );
+
+    final resp = response;
 
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body) as Map<String, dynamic>;

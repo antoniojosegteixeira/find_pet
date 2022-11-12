@@ -15,22 +15,23 @@ class ListAnimalsRepositoryImpl implements ListAnimalsRepository {
   Future<Either<Failure, ListAnimalsPageModel>> listAnimals({
     String? name,
     String? sex,
-    required String species,
+    String? species,
     String? breed,
-    required String color,
+    String? color,
     String? age,
   }) async {
     try {
       final response = await remoteDatasource.listAnimals(
         name: name!,
         sex: sex!,
-        species: species,
+        species: species!,
         breed: breed!,
-        color: color,
+        color: color!,
         age: age!,
       );
       return Right(response);
     } catch (err) {
+      print(err);
       return Left(ServerFailure());
     }
   }

@@ -1,18 +1,18 @@
 import 'package:equatable/equatable.dart';
-import 'package:find_pet/features/list_animals/domain/entities/list_animals_entity.dart';
+import 'package:find_pet/features/list_animals/data/models/list_animals_result_model.dart';
 
 class ListAnimalsPageEntity extends Equatable {
   const ListAnimalsPageEntity({
-    required this.resultList,
-    required this.page,
-    required this.isLastPage,
-    required this.resultLength,
+    required this.count,
+    this.next,
+    this.previous,
+    required this.results,
   });
 
-  final List<ListAnimalsEntity> resultList;
-  final int page;
-  final bool isLastPage;
-  final int resultLength;
+  final int count;
+  final String? next;
+  final String? previous;
+  final List<ListAnimalsResultModel> results;
 
   @override
   List<Object?> get props => [];

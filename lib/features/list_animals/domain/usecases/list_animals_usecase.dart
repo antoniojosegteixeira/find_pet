@@ -16,12 +16,12 @@ class ListAnimalsUsecase
     ListAnimalsParams params,
   ) async {
     return repository.listAnimals(
-      name: params.name!,
-      sex: params.sex!,
-      species: params.species,
-      breed: params.breed!,
-      color: params.color,
-      age: params.age!,
+      name: params.name ?? '',
+      sex: params.sex ?? '',
+      species: params.species ?? '',
+      breed: params.breed ?? '',
+      color: params.color ?? '',
+      age: params.age ?? '',
     );
   }
 }
@@ -30,17 +30,17 @@ class ListAnimalsParams extends Equatable {
   const ListAnimalsParams({
     this.name,
     this.sex,
-    required this.species,
+    this.species,
     this.breed,
-    required this.color,
+    this.color,
     this.age,
   });
 
   final String? name;
   final String? sex;
-  final String species;
+  final String? species;
   final String? breed;
-  final String color;
+  final String? color;
   final String? age;
 
   @override
