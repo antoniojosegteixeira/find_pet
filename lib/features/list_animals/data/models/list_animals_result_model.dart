@@ -4,7 +4,7 @@ class ListAnimalsResultModel extends ListAnimalsResultEntity {
   const ListAnimalsResultModel({
     required super.id,
     super.name,
-    super.age,
+    required super.age,
     required super.species,
     super.breed,
     required super.color,

@@ -12,9 +12,9 @@ class ListAnimalsInitial extends ListAnimalsState {}
 class ListAnimalsLoading extends ListAnimalsState {}
 
 class ListAnimalsDone extends ListAnimalsState {
-  const ListAnimalsDone({required this.data});
+  const ListAnimalsDone({required this.listAnimalsPage});
 
-  final ListAnimalsPageEntity data;
+  final ListAnimalsPageEntity listAnimalsPage;
 }
 
 class ListAnimalsError extends ListAnimalsState {}

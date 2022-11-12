@@ -21,7 +21,7 @@ class ListAnimalsBloc extends Bloc<ListAnimalsEvent, ListAnimalsState> {
               ListAnimalsError(),
             ),
             (r) => emit(
-              ListAnimalsDone(data: r),
+              ListAnimalsDone(listAnimalsPage: r),
             ),
           );
         } catch (err) {

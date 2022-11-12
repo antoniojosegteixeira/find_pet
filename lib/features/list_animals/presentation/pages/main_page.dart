@@ -60,7 +60,9 @@ class _MainPageState extends State<MainPage> {
                       }
                       if (state is ListAnimalsDone) {
                         return Expanded(
-                          child: ListSuccessPage(),
+                          child: ListSuccessPage(
+                            listAnimalsPage: state.listAnimalsPage,
+                          ),
                         );
                       }
                       if (state is ListAnimalsError) {

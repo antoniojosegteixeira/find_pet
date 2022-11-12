@@ -1,11 +1,10 @@
 import 'package:equatable/equatable.dart';
-import 'package:find_pet/features/list_animals/data/models/list_animals_result_model.dart';
 
 class ListAnimalsResultEntity extends Equatable {
   const ListAnimalsResultEntity({
     required this.id,
     this.name,
-    this.age,
+    required this.age,
     required this.species,
     this.breed,
     required this.color,
@@ -21,10 +20,10 @@ class ListAnimalsResultEntity extends Equatable {
 
   final int id;
   final String? name;
-  final String? age;
+  final String age;
   final String species;
   final String? breed;
-  final String? color;
+  final String color;
   final String contact;
   final String city;
   final String state;

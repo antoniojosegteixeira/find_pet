@@ -1,10 +1,14 @@
+import 'package:find_pet/features/list_animals/domain/entities/list_animals_page_entity.dart';
 import 'package:find_pet/features/list_animals/presentation/widgets/animal_card.dart';
 import 'package:flutter/material.dart';
 
 class ListSuccessPage extends StatelessWidget {
-  ListSuccessPage({Key? key}) : super(key: key);
+  const ListSuccessPage({
+    Key? key,
+    required this.listAnimalsPage,
+  }) : super(key: key);
 
-  final list = ["DOG", "CAT", "PARROT", "DOG", "CAT", "PARROT"];
+  final ListAnimalsPageEntity listAnimalsPage;
 
   @override
   Widget build(BuildContext context) {
@@ -14,15 +18,16 @@ class ListSuccessPage extends StatelessWidget {
         maxCrossAxisExtent: 250,
         mainAxisExtent: 320,
       ),
-      itemCount: list.length,
+      itemCount: listAnimalsPage.results.length,
       itemBuilder: (BuildContext context, int index) {
-        return const AnimalCard(
-          species: 'Dog',
-          age: 'Adult',
-          breed: 'Golden Retriever',
-          color: 'Golden',
-          city: 'Cuiabá',
-          state: 'MT',
+        final result = listAnimalsPage.results[index];
+        return AnimalCard(
+          species: result.species,
+          age: result.age,
+          breed: result.breed ?? 'Não consta',
+          color: result.color,
+          city: result.city,
+          state: result.state,
         );
       },
     );
