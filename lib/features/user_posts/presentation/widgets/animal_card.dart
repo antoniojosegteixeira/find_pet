@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:find_pet/core/themes/ui/app_fonts.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class UserAnimalCard extends StatelessWidget {
-  const UserAnimalCard({
+class AnimalCard extends StatelessWidget {
+  const AnimalCard({
     Key? key,
+    required this.id,
     this.name,
     required this.species,
     required this.age,
@@ -14,6 +15,7 @@ class UserAnimalCard extends StatelessWidget {
     required this.state,
   }) : super(key: key);
 
+  final String id;
   final String? name;
   final String species;
   final String age;
@@ -21,8 +23,6 @@ class UserAnimalCard extends StatelessWidget {
   final String color;
   final String city;
   final String state;
-
-  final String mockPostId = '912h89dha812j';
 
   String createNameOrIdentification() {
     if (name != null) {
@@ -36,7 +36,7 @@ class UserAnimalCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Modular.to.pushNamed('/search-animals/details/$mockPostId');
+        Modular.to.pushNamed('/animal-detail/$id');
       },
       child: SizedBox(
         width: MediaQuery.of(context).size.width / 2 - 50,
@@ -52,33 +52,12 @@ class UserAnimalCard extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Stack(
-                alignment: Alignment.topRight,
-                children: [
-                  Image.network(
-                    'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/golden-retriever-royalty-free-image-506756303-1560962726.jpg?crop=0.672xw:1.00xh;0.166xw,0&resize=640:*',
-                    fit: BoxFit.cover,
-                    alignment: Alignment.center,
-                    height: 145,
-                    width: MediaQuery.of(context).size.width,
-                  ),
-                  PopupMenuButton(
-                    icon: const Icon(
-                      Icons.more_vert_rounded,
-                      color: Colors.white,
-                    ),
-                    itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-                      const PopupMenuItem(
-                        child: Text('Editar'),
-                        //TODO: add edit
-                      ),
-                      const PopupMenuItem(
-                        child: Text('Excluir'),
-                        //TODO: add delete
-                      ),
-                    ],
-                  ),
-                ],
+              Image.network(
+                'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/golden-retriever-royalty-free-image-506756303-1560962726.jpg?crop=0.672xw:1.00xh;0.166xw,0&resize=640:*',
+                fit: BoxFit.cover,
+                alignment: Alignment.center,
+                height: 145,
+                width: MediaQuery.of(context).size.width,
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
