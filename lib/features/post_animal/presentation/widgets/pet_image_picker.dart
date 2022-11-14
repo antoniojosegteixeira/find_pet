@@ -44,8 +44,7 @@ class _PetImagePickerState extends State<PetImagePicker> {
                     ),
                   )
                 : PickerBox(
-                    child: GridView.builder(
-                      itemCount: bloc.imageFiles.length,
+                    child: GridView(
                       padding: const EdgeInsets.all(3),
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
@@ -53,16 +52,19 @@ class _PetImagePickerState extends State<PetImagePicker> {
                         mainAxisSpacing: 3,
                         crossAxisSpacing: 3,
                       ),
-                      itemBuilder: ((context, index) {
-                        return ImageCard(
-                          image: bloc.imageFiles[index],
-                          removeImage: () {
-                            bloc.imageFiles.removeWhere((element) =>
-                                element.path == bloc.imageFiles[index].path);
-                            setState(() {});
-                          },
-                        );
-                      }),
+                      children: List<Widget>.generate(bloc.imageFiles.length,
+                              (index) {
+                            return ImageCard(
+                              image: bloc.imageFiles[index],
+                              removeImage: () {
+                                bloc.imageFiles.removeWhere((element) =>
+                                    element.path ==
+                                    bloc.imageFiles[index].path);
+                                setState(() {});
+                              },
+                            );
+                          }) +
+                          [addMorePics()],
                     ),
                   ),
           );
@@ -81,6 +83,30 @@ _getFromGallery() async {
   if (pickedFile != null) {
     return File(pickedFile.path);
   }
+}
+
+Widget addMorePics() {
+  return Container(
+    padding: const EdgeInsets.all(6),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(5),
+      color: AppColors.colorNeutral_100,
+    ),
+    clipBehavior: Clip.antiAliasWithSaveLayer,
+    width: 100,
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: const [
+        Icon(
+          Icons.add_a_photo,
+        ),
+        Text(
+          'Adicionar mais fotos',
+          textAlign: TextAlign.center,
+        )
+      ],
+    ),
+  );
 }
 
 class PickerBox extends StatelessWidget {
