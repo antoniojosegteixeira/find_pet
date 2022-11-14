@@ -1,4 +1,3 @@
-import 'package:find_pet/features/list_animals/domain/usecases/list_animals_usecase.dart';
 import 'package:find_pet/features/post_animal/data/datasources/post_animal_datasource.dart';
 import 'package:find_pet/features/post_animal/data/repositories/post_animal_repository_impl.dart';
 import 'package:find_pet/features/post_animal/domain/usecases/post_animal_usecase.dart';

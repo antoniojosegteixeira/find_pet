@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
@@ -21,6 +23,7 @@ class PostAnimalBloc extends Bloc<PostAnimalEvent, PostAnimalState> {
   String country = '';
   String? address;
   String? postType;
+  List<File> imageFiles = [];
   PostAnimalBloc({
     required this.usecase,
   }) : super(PostAnimalInitial()) {
@@ -55,7 +58,6 @@ class PostAnimalBloc extends Bloc<PostAnimalEvent, PostAnimalState> {
               ));
             });
           } catch (err) {
-            print(err);
             emit(PostAnimalError());
           }
         }
