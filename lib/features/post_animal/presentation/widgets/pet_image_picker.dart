@@ -4,6 +4,7 @@ import 'package:find_pet/core/themes/ui/app_colors.dart';
 import 'package:find_pet/core/widgets/main_button.dart';
 import 'package:find_pet/features/post_animal/presentation/bloc/post_animal_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:image_picker/image_picker.dart';
@@ -17,6 +18,10 @@ class PetImagePicker extends StatefulWidget {
 
 class _PetImagePickerState extends State<PetImagePicker> {
   final PostAnimalBloc bloc = Modular.get<PostAnimalBloc>();
+  late final ScrollController _scrollController = ScrollController(
+    initialScrollOffset: 0.0,
+    keepScrollOffset: true,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +35,17 @@ class _PetImagePickerState extends State<PetImagePicker> {
 
               if (images != null) {
                 bloc.imageFiles = [...bloc.imageFiles, images];
-                setState(() {});
+                setState(() {
+                  if (_scrollController.hasClients) {
+                    SchedulerBinding.instance.addPostFrameCallback((_) {
+                      _scrollController.animateTo(
+                        _scrollController.position.maxScrollExtent,
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.ease,
+                      );
+                    });
+                  }
+                });
               }
             },
             child: bloc.imageFiles.isEmpty
@@ -46,6 +61,7 @@ class _PetImagePickerState extends State<PetImagePicker> {
                 : PickerBox(
                     child: GridView(
                       padding: const EdgeInsets.all(3),
+                      controller: _scrollController,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
@@ -60,6 +76,7 @@ class _PetImagePickerState extends State<PetImagePicker> {
                                 bloc.imageFiles.removeWhere((element) =>
                                     element.path ==
                                     bloc.imageFiles[index].path);
+
                                 setState(() {});
                               },
                             );
