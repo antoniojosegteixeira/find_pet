@@ -1,5 +1,3 @@
-import 'package:find_pet/features/list_animals/data/models/list_animals_result_model.dart';
-import 'package:find_pet/features/list_animals/domain/entities/list_animals_page_entity.dart';
 import 'package:find_pet/features/user_posts/data/models/user_posts_result_model.dart';
 import 'package:find_pet/features/user_posts/domain/entities/user_posts_page_entity.dart';
 

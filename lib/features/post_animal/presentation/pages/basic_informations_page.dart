@@ -7,7 +7,6 @@ import 'package:find_pet/features/post_animal/presentation/widgets/Dropdown.dart
 import 'package:find_pet/features/post_animal/presentation/widgets/filled_input.dart';
 import 'package:find_pet/features/post_animal/presentation/widgets/label_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class BasicInformationsPage extends StatefulWidget {

@@ -31,7 +31,6 @@ class UserPostsRepositoryImpl implements UserPostsRepository {
       );
       return Right(response);
     } catch (err) {
-      print(err);
       return Left(ServerFailure());
     }
   }

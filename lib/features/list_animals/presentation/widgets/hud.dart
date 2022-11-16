@@ -23,7 +23,7 @@ class _HudState extends State<Hud> {
               isOpen = true;
             });
           },
-          icon: Icon(Icons.menu),
+          icon: const Icon(Icons.menu),
           color: AppColors.colorNeutral_900,
           splashRadius: 25,
         ),
@@ -44,28 +44,28 @@ class _HudState extends State<Hud> {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.input),
-            title: Text('Welcome'),
+            leading: const Icon(Icons.input),
+            title: const Text('Welcome'),
             onTap: () => {},
           ),
           ListTile(
-            leading: Icon(Icons.verified_user),
-            title: Text('Profile'),
+            leading: const Icon(Icons.verified_user),
+            title: const Text('Profile'),
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Settings'),
+            leading: const Icon(Icons.settings),
+            title: const Text('Settings'),
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
-            leading: Icon(Icons.border_color),
-            title: Text('Feedback'),
+            leading: const Icon(Icons.border_color),
+            title: const Text('Feedback'),
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
-            leading: Icon(Icons.exit_to_app),
-            title: Text('Logout'),
+            leading: const Icon(Icons.exit_to_app),
+            title: const Text('Logout'),
             onTap: () => {Navigator.of(context).pop()},
           ),
         ],

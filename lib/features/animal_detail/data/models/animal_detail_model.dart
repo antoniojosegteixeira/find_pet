@@ -1,5 +1,4 @@
 import 'package:find_pet/features/animal_detail/domain/entities/animal_detail_entity.dart';
-import 'package:find_pet/features/list_animals/domain/entities/list_animals_result_entity.dart';
 
 class AnimalDetailModel extends AnimalDetailEntity {
   const AnimalDetailModel({

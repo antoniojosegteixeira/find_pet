@@ -9,11 +9,7 @@ class ChooseServicePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final AppBar appBar = AppBar();
-
-    final screenHeight = (size.height - appBar.preferredSize.height) -
-        MediaQuery.of(context).padding.top;
 
     return Scaffold(
       resizeToAvoidBottomInset: true,

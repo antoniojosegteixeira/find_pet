@@ -31,7 +31,6 @@ class ListAnimalsRepositoryImpl implements ListAnimalsRepository {
       );
       return Right(response);
     } catch (err) {
-      print(err);
       return Left(ServerFailure());
     }
   }

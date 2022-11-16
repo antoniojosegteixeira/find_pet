@@ -1,10 +1,8 @@
-import 'package:find_pet/core/routes/routes.dart';
 import 'package:find_pet/core/themes/ui/app_colors.dart';
 import 'package:find_pet/features/register/presentation/bloc/register_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:find_pet/core/utils/validations.dart';
 import 'package:find_pet/core/themes/ui/app_fonts.dart';
 
 class EmailConfirmationPage extends StatefulWidget {

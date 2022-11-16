@@ -8,7 +8,6 @@ import 'package:find_pet/features/post_animal/presentation/widgets/pet_image_pic
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:image_picker/image_picker.dart';
 
 class AddPhotoPage extends StatefulWidget {
   const AddPhotoPage({Key? key}) : super(key: key);

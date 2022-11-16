@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:find_pet/core/error/failures.dart';
 import 'package:find_pet/core/hive/services/session.service.dart';
 import 'package:find_pet/features/login/data/models/user_model.dart';
-import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
 abstract class LoginDatasource {

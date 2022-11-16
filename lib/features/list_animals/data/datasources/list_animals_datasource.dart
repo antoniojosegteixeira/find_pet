@@ -50,8 +50,6 @@ class ListAnimalsDatasourceImpl implements ListAnimalsDatasource {
       */
     );
 
-    final resp = response;
-
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body) as Map<String, dynamic>;
       return ListAnimalsPageModel.fromJson(json);

@@ -1,4 +1,3 @@
-import 'package:find_pet/core/utils/validations.dart';
 import 'package:find_pet/core/widgets/main_button.dart';
 import 'package:find_pet/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:flutter/material.dart';

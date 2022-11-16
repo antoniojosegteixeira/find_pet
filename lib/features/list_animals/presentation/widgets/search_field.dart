@@ -1,7 +1,6 @@
 import 'package:find_pet/core/themes/ui/app_colors.dart';
 import 'package:find_pet/features/list_animals/presentation/widgets/settings_button.dart';
 import 'package:flutter/material.dart';
-import 'package:find_pet/core/themes/ui/app_fonts.dart';
 
 class SearchField extends StatefulWidget {
   const SearchField({Key? key}) : super(key: key);
@@ -19,7 +18,7 @@ class _SearchFieldState extends State<SearchField> {
       constraints:
           BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 25),
       child: Padding(
-        padding: EdgeInsets.fromLTRB(3, 8, 0, 0),
+        padding: const EdgeInsets.fromLTRB(3, 8, 0, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

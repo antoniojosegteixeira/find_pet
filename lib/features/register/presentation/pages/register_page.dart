@@ -1,4 +1,3 @@
-import 'package:find_pet/core/routes/routes.dart';
 import 'package:find_pet/core/utils/validations.dart';
 import 'package:find_pet/core/widgets/main_button.dart';
 import 'package:find_pet/features/register/presentation/bloc/register_bloc.dart';
@@ -17,12 +16,6 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  Future<void> _saveForm(BuildContext context) async {
-    if (_formKey.currentState != null && _formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-    }
-  }
 
   @override
   void dispose() {

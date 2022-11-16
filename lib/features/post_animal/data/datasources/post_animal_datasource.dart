@@ -41,8 +41,6 @@ class PostAnimalDatasourceImpl implements PostAnimalDatasource {
   }) async {
     final sessionBox = SessionService.getSession();
 
-    print(species);
-
     final response = await client.post(
       Uri.parse(
         'http://192.168.15.20:8000/posts/create/',
@@ -68,8 +66,6 @@ class PostAnimalDatasourceImpl implements PostAnimalDatasource {
         'post_type': postType,
       }),
     );
-
-    final response2 = response;
 
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body) as Map<String, dynamic>;

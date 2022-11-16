@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:find_pet/core/themes/ui/app_colors.dart';
-import 'package:find_pet/core/widgets/main_button.dart';
 import 'package:find_pet/features/post_animal/presentation/bloc/post_animal_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
