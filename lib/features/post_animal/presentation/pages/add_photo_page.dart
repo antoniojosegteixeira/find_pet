@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:find_pet/core/themes/ui/app_colors.dart';
 import 'package:find_pet/core/themes/ui/app_fonts.dart';
 import 'package:find_pet/core/widgets/main_button.dart';
