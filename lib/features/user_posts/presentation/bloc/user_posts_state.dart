@@ -14,7 +14,7 @@ class UserPostsLoading extends UserPostsState {}
 class UserPostsDone extends UserPostsState {
   const UserPostsDone({required this.userPostsPage});
 
-  final UserPostsPageEntity userPostsPage;
+  final ListAnimalsPageEntity userPostsPage;
 }
 
 class UserPostsError extends UserPostsState {}

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:find_pet/features/user_posts/domain/entities/user_posts_page_entity.dart';
+import 'package:find_pet/core/list_animals/entities/list_animals_page_entity.dart';
 import 'package:find_pet/features/user_posts/domain/usecases/user_posts_usecase.dart';
 
 part 'user_posts_event.dart';

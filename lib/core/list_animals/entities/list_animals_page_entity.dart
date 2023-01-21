@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
-import 'package:find_pet/features/user_posts/data/models/user_posts_result_model.dart';
+import 'package:find_pet/core/list_animals/models/list_animals_result_model.dart';
 
-class UserPostsPageEntity extends Equatable {
-  const UserPostsPageEntity({
+class ListAnimalsPageEntity extends Equatable {
+  const ListAnimalsPageEntity({
     required this.count,
     this.next,
     this.previous,
@@ -12,7 +12,7 @@ class UserPostsPageEntity extends Equatable {
   final int count;
   final String? next;
   final String? previous;
-  final List<UserPostsResultModel> results;
+  final List<ListAnimalsResultModel> results;
 
   @override
   List<Object?> get props => [];

@@ -1,8 +1,8 @@
 import 'package:find_pet/core/themes/ui/app_colors.dart';
 import 'package:find_pet/core/widgets/navigation_drawer.dart';
-import 'package:find_pet/features/list_animals/presentation/bloc/list_animals_bloc.dart';
 import 'package:find_pet/features/list_animals/presentation/pages/list_success_page.dart';
 import 'package:find_pet/features/list_animals/presentation/widgets/search_field.dart';
+import 'package:find_pet/features/user_posts/presentation/bloc/user_posts_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -15,11 +15,11 @@ class UserPostsPage extends StatefulWidget {
 }
 
 class _UserPostsPageState extends State<UserPostsPage> {
-  final ListAnimalsBloc bloc = Modular.get<ListAnimalsBloc>();
+  final UserPostsBloc bloc = Modular.get<UserPostsBloc>();
 
   @override
   void initState() {
-    bloc.add(GetAnimalsList());
+    bloc.add(GetUserAnimalList());
     super.initState();
   }
 
@@ -51,21 +51,21 @@ class _UserPostsPageState extends State<UserPostsPage> {
                       ],
                     ),
                   ),
-                  BlocBuilder<ListAnimalsBloc, ListAnimalsState>(
+                  BlocBuilder<UserPostsBloc, UserPostsState>(
                     builder: (context, state) {
-                      if (state is ListAnimalsLoading) {
+                      if (state is UserPostsLoading) {
                         return const Expanded(
                           child: Center(child: CircularProgressIndicator()),
                         );
                       }
-                      if (state is ListAnimalsDone) {
+                      if (state is UserPostsDone) {
                         return Expanded(
                           child: ListSuccessPage(
-                            listAnimalsPage: state.listAnimalsPage,
+                            listAnimalsPage: state.userPostsPage,
                           ),
                         );
                       }
-                      if (state is ListAnimalsError) {
+                      if (state is UserPostsError) {
                         return const Expanded(
                           child: Text('Erro'),
                         );

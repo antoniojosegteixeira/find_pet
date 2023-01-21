@@ -142,6 +142,7 @@ class _LoginPageState extends State<LoginPage> {
                           if (!_formKey.currentState!.validate()) {
                             return;
                           }
+
                           bloc.add(
                             DoLogin(
                               email: _emailController.text,

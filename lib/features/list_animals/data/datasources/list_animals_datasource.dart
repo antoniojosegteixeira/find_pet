@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:find_pet/core/error/failures.dart';
-import 'package:find_pet/features/list_animals/data/models/list_animals_page_model.dart';
+import 'package:find_pet/core/list_animals/models/list_animals_page_model.dart';
 import 'package:http/http.dart' as http;
 
 abstract class ListAnimalsDatasource {
@@ -38,16 +38,6 @@ class ListAnimalsDatasourceImpl implements ListAnimalsDatasource {
         'Connection': 'keep-alive',
         'Accept-Encoding': 'gzip, deflate, br',
       },
-      /*
-      body: jsonEncode(<String, String>{
-        'name': name!,
-        'sex': sex!,
-        'species': species,
-        'breed': breed!,
-        'color': color,
-        'age': age!,
-      }),
-      */
     );
 
     if (response.statusCode == 200) {

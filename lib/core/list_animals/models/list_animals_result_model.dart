@@ -1,7 +1,7 @@
-import 'package:find_pet/features/user_posts/domain/entities/user_posts_result_entity.dart';
+import 'package:find_pet/core/list_animals/entities/list_animals_result_entity.dart';
 
-class UserPostsResultModel extends UserPostsResultEntity {
-  const UserPostsResultModel({
+class ListAnimalsResultModel extends ListAnimalsResultEntity {
+  const ListAnimalsResultModel({
     required super.id,
     super.name,
     required super.age,
@@ -18,8 +18,8 @@ class UserPostsResultModel extends UserPostsResultEntity {
     required super.author,
   });
 
-  factory UserPostsResultModel.fromJson(Map<String, dynamic> json) =>
-      UserPostsResultModel(
+  factory ListAnimalsResultModel.fromJson(Map<String, dynamic> json) =>
+      ListAnimalsResultModel(
         id: json["id"],
         name: json["name"],
         age: json["age"],

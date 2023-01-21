@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:find_pet/core/error/failures.dart';
+import 'package:find_pet/core/list_animals/entities/list_animals_page_entity.dart';
 import 'package:find_pet/core/usecase/usecase.dart';
-import 'package:find_pet/features/list_animals/domain/entities/list_animals_page_entity.dart';
 import 'package:find_pet/features/list_animals/domain/repositories/list_animals_repository.dart';
 
 class ListAnimalsUsecase

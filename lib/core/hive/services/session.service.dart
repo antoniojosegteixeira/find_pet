@@ -2,6 +2,17 @@ import 'package:find_pet/features/login/data/models/user_model.dart';
 import 'package:find_pet/features/login/domain/entities/user_entity.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+const emptyUserModel = UserModel(
+  id: '',
+  email: '',
+  username: '',
+  city: '',
+  state: '',
+  country: '',
+  sessionToken: '',
+  refreshToken: '',
+);
+
 class SessionService {
   SessionService._();
 
@@ -13,18 +24,7 @@ class SessionService {
 
     sessionBox = await Hive.openBox<UserModel>('sessionBox');
 
-    sessionRegister(
-      const UserModel(
-        id: '',
-        email: '',
-        username: '',
-        city: '',
-        state: '',
-        country: '',
-        sessionToken: '',
-        refreshToken: '',
-      ),
-    );
+    sessionRegister(emptyUserModel);
   }
 
   static void sessionRegister(UserModel user) {
@@ -35,18 +35,7 @@ class SessionService {
   }
 
   static bool logout() {
-    sessionRegister(
-      const UserModel(
-        id: '',
-        email: '',
-        username: '',
-        city: '',
-        state: '',
-        country: '',
-        sessionToken: '',
-        refreshToken: '',
-      ),
-    );
+    sessionRegister(emptyUserModel);
     return false;
   }
 

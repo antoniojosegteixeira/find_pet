@@ -1,5 +1,5 @@
-import 'package:find_pet/features/list_animals/data/models/list_animals_result_model.dart';
-import 'package:find_pet/features/list_animals/domain/entities/list_animals_page_entity.dart';
+import 'package:find_pet/core/list_animals/entities/list_animals_page_entity.dart';
+import 'package:find_pet/core/list_animals/models/list_animals_result_model.dart';
 
 class ListAnimalsPageModel extends ListAnimalsPageEntity {
   const ListAnimalsPageModel({

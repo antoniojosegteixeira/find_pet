@@ -1,18 +1,18 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:find_pet/core/error/failures.dart';
+import 'package:find_pet/core/list_animals/entities/list_animals_page_entity.dart';
 import 'package:find_pet/core/usecase/usecase.dart';
-import 'package:find_pet/features/user_posts/domain/entities/user_posts_page_entity.dart';
 import 'package:find_pet/features/user_posts/domain/repositories/user_posts_repository.dart';
 
 class UserPostsUsecase
-    implements UseCase<UserPostsPageEntity, UserPostsParams> {
+    implements UseCase<ListAnimalsPageEntity, UserPostsParams> {
   UserPostsUsecase({required this.repository});
 
   final UserPostsRepository repository;
 
   @override
-  Future<Either<Failure, UserPostsPageEntity>> call(
+  Future<Either<Failure, ListAnimalsPageEntity>> call(
     UserPostsParams params,
   ) async {
     return repository.getUserPosts(

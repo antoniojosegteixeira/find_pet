@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:find_pet/core/error/failures.dart';
 import 'package:find_pet/features/list_animals/data/datasources/list_animals_datasource.dart';
-import 'package:find_pet/features/list_animals/data/models/list_animals_page_model.dart';
+import 'package:find_pet/core/list_animals/models/list_animals_page_model.dart';
 import 'package:find_pet/features/list_animals/domain/repositories/list_animals_repository.dart';
 
 class ListAnimalsRepositoryImpl implements ListAnimalsRepository {

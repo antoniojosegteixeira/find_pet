@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:find_pet/bootstrap.dart';
 import 'package:find_pet/core/hive/services/session.service.dart';
 import 'package:find_pet/core/themes/ui/app_colors.dart';

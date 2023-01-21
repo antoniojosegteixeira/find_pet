@@ -1,4 +1,4 @@
-import 'package:find_pet/features/list_animals/domain/entities/list_animals_page_entity.dart';
+import 'package:find_pet/core/list_animals/entities/list_animals_page_entity.dart';
 import 'package:find_pet/features/list_animals/presentation/widgets/animal_card.dart';
 import 'package:flutter/material.dart';
 
