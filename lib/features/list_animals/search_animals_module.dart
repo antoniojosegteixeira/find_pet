@@ -3,6 +3,7 @@ import 'package:find_pet/features/list_animals/data/repositories/list_animals_re
 import 'package:find_pet/features/list_animals/domain/usecases/list_animals_usecase.dart';
 import 'package:find_pet/features/list_animals/presentation/bloc/list_animals_bloc.dart';
 import 'package:find_pet/features/list_animals/presentation/pages/main_page.dart';
+import 'package:find_pet/features/list_animals/presentation/widgets/search_filter.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:http/http.dart' as http;
 
@@ -21,6 +22,10 @@ class SearchAnimalsModule extends Module {
         ChildRoute<dynamic>(
           '/',
           child: (context, args) => const MainPage(),
+        ),
+        ChildRoute<dynamic>(
+          '/search-filter/',
+          child: (context, args) => const SearchFilter(),
         ),
       ];
 }
