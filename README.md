@@ -1,16 +1,12 @@
-# find_pet
+# FIND PET - FLUTTER
+![image](https://user-images.githubusercontent.com/75284432/216849463-fd1db469-da73-4feb-9edb-34b455d6011b.png)
 
-A new Flutter project.
 
-## Getting Started
+FindPet é um aplicativo em Flutter com o intuito de auxiliar as buscas a animais perdidos. 
 
-This project is a starting point for a Flutter application.
+[Acessar o backend](https://github.com/antoniojosegteixeira/find_pet_django)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
